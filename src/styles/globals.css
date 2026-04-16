@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  /* Vibrant & High-Contrast Palette */
+  --color-background: #050508; /* Deep Midnight Indigo */
+  --color-foreground: #FFFFFF;
+  --color-muted: #A1A1AA;
+  --color-accent: #FFFFFF;
+  
+  /* Feature Accents */
+  --color-vibrant-emerald: #10B981;
+  --color-vibrant-violet: #8B5CF6;
+  --color-vibrant-amber: #F59E0B;
+  --color-vibrant-rose: #F43F5E;
+  --color-vibrant-cyan: #06B6D4;
+
+  --font-display: "Outfit", "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Fira Code", monospace;
+
+  --tracking-tightest: -0.06em;
+  --tracking-tighter: -0.03em;
+  
+  --spacing-8: 2rem;
+  --spacing-16: 4rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-vibrant-violet/30 selection:text-white;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    @apply tracking-tighter;
+  }
+}
+
+@layer components {
+  /* Bespoke Premium Card */
+  .bespoke-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-3xl transition-all duration-700 hover:border-vibrant-violet/30 hover:bg-white/[0.04];
+  }
+
+  /* Responsive Editorial Header */
+  .text-editorial {
+    font-size: clamp(2.5rem, 12vw, 9rem);
+    @apply font-black leading-[0.95] tracking-tightest bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/30;
+  }
+
+  .text-editorial-sub {
+    font-size: clamp(2rem, 8vw, 6rem);
+    @apply font-black leading-[0.95] tracking-tightest bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/30;
+  }
+
+  /* Responsive Subheader */
+  .text-story {
+    @apply text-lg md:text-xl text-zinc-400 leading-relaxed max-w-prose;
+  }
+
+  /* Visibility-First Annotation */
+  .annotation {
+    @apply font-mono text-[11px] md:text-[12px] uppercase tracking-[0.25em] text-vibrant-cyan font-semibold mb-3 flex items-center gap-3;
+  }
+
+  .annotation::before {
+    content: '';
+    @apply w-8 h-px bg-vibrant-cyan/40;
+  }
+
+  /* Premium Animation: Mask Reveal */
+  .mask-reveal {
+    mask-image: linear-gradient(to right, black, black 50%, transparent 50%);
+    mask-size: 200% 100%;
+    mask-position: 100% 0;
+    transition: mask-position 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mask-reveal:hover {
+    mask-position: 0 0;
+  }
+
+  /* Enhanced Background Mesh */
+  .bg-mesh {
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(240, 30%, 15%, 1) 0, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(280, 40%, 10%, 0.8) 0, transparent 50%),
+      radial-gradient(at 50% 50%, hsla(160, 40%, 10%, 0.1) 0, transparent 70%);
+    background-attachment: fixed;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto;
+  }
+
+  /* WhatsApp Pulse (Contrast Checked) */
+  .whatsapp-pulse {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+    animation: pulse-whatsapp 2s infinite;
+  }
+}
+
+@keyframes pulse-whatsapp {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.impact-link {
+  @apply relative inline-block text-white/60 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-vibrant-cyan after:transition-all hover:after:w-full hover:text-white;
+}
+
+.input-minimal {
+  @apply w-full bg-white/[0.04] border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-vibrant-violet/50 transition-all font-sans;
+}
+
