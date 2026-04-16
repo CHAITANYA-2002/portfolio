@@ -6,11 +6,11 @@ const Hero = () => {
       {/* 8k Ultra-High Resolution Asset */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero-8k.png" 
+          src="/hero-prismatic.png" 
           alt="Technical Product Manager Portfolio Background" 
-          className="w-full h-full object-cover opacity-90 transition-opacity duration-1000"
+          className="w-full h-full object-cover opacity-60 transition-opacity duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10 w-full">
