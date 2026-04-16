@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Vibrant & High-Contrast Palette */
-  --color-background: #050508; /* Deep Midnight Indigo */
-  --color-foreground: #FFFFFF;
-  --color-muted: #A1A1AA;
+  /* Vivid Technical Palette (Zero-Grey) */
+  --color-background: #020617; /* Deep Saturated Navy */
+  --color-foreground: #F8FAFC; /* Sky-50 */
+  --color-muted: #94A3B8; /* Slate-400, but used sparingly */
   --color-accent: #FFFFFF;
   
-  /* Feature Accents */
+  /* Vibrant Feature Accents */
   --color-vibrant-emerald: #10B981;
   --color-vibrant-violet: #8B5CF6;
   --color-vibrant-amber: #F59E0B;
   --color-vibrant-rose: #F43F5E;
   --color-vibrant-cyan: #06B6D4;
+  --color-vibrant-sky: #38BDF8;
 
   --font-display: "Outfit", "Playfair Display", serif;
   --font-sans: "Inter", system-ui, sans-serif;
@@ -42,63 +43,52 @@
 }
 
 @layer components {
-  /* Bespoke Premium Card */
+  /* High-Contrast Professional Card */
   .bespoke-card {
-    @apply relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-3xl transition-all duration-700 hover:border-vibrant-violet/30 hover:bg-white/[0.04];
+    @apply relative overflow-hidden rounded-3xl border border-white/[0.12] bg-white/[0.03] backdrop-blur-3xl transition-all duration-500 hover:border-vibrant-violet/40 hover:bg-white/[0.06] hover:shadow-[0_0_40px_rgba(139,92,246,0.1)];
+  }
+
+  .bento-grid {
+    @apply grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6;
   }
 
   /* Responsive Editorial Header */
   .text-editorial {
     font-size: clamp(2.5rem, 12vw, 9rem);
-    @apply font-black leading-[0.95] tracking-tightest bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/30;
+    @apply font-black leading-[0.95] tracking-tightest bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/40;
   }
 
   .text-editorial-sub {
-    font-size: clamp(2rem, 8vw, 6rem);
-    @apply font-black leading-[0.95] tracking-tightest bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/30;
+    font-size: clamp(2rem, 8vw, 5rem);
+    @apply font-black leading-[0.95] tracking-tightest bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/40;
   }
 
-  /* Responsive Subheader */
+  /* Responsive Subheader (Crisp Saturated Tints) */
   .text-story {
-    @apply text-lg md:text-xl text-zinc-400 leading-relaxed max-w-prose;
+    @apply text-lg md:text-xl text-vibrant-sky/80 leading-relaxed max-w-prose;
   }
 
   /* Visibility-First Annotation */
   .annotation {
-    @apply font-mono text-[11px] md:text-[12px] uppercase tracking-[0.25em] text-vibrant-cyan font-semibold mb-3 flex items-center gap-3;
+    @apply font-mono text-[11px] md:text-[13px] uppercase tracking-[0.3em] text-vibrant-cyan font-black mb-4 flex items-center gap-4;
   }
 
   .annotation::before {
     content: '';
-    @apply w-8 h-px bg-vibrant-cyan/40;
+    @apply w-10 h-px bg-vibrant-cyan/50;
   }
 
-  /* Premium Animation: Mask Reveal */
-  .mask-reveal {
-    mask-image: linear-gradient(to right, black, black 50%, transparent 50%);
-    mask-size: 200% 100%;
-    mask-position: 100% 0;
-    transition: mask-position 1s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .mask-reveal:hover {
-    mask-position: 0 0;
-  }
-
-  /* Enhanced Background Mesh */
-  .bg-mesh {
-    background-image: 
-      radial-gradient(at 0% 0%, hsla(240, 30%, 15%, 1) 0, transparent 50%),
-      radial-gradient(at 100% 100%, hsla(280, 40%, 10%, 0.8) 0, transparent 50%),
-      radial-gradient(at 50% 50%, hsla(160, 40%, 10%, 0.1) 0, transparent 70%);
-    background-attachment: fixed;
+  /* Moving Aurora Backdrop */
+  .aurora-backdrop {
+    @apply absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.05),transparent_70%)] opacity-50;
+    filter: blur(80px);
   }
 
   .section-padding {
-    @apply py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto;
+    @apply py-24 md:py-40 px-6 md:px-12 max-w-7xl mx-auto;
   }
 
-  /* WhatsApp Pulse (Contrast Checked) */
+  /* Pulse Animation Refinement */
   .whatsapp-pulse {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
     animation: pulse-whatsapp 2s infinite;
@@ -106,16 +96,12 @@
 }
 
 @keyframes pulse-whatsapp {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-  70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
-
-.impact-link {
-  @apply relative inline-block text-white/60 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-vibrant-cyan after:transition-all hover:after:w-full hover:text-white;
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
 .input-minimal {
-  @apply w-full bg-white/[0.04] border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-vibrant-violet/50 transition-all font-sans;
+  @apply w-full bg-white/[0.05] border border-white/10 rounded-2xl px-8 py-5 text-white focus:outline-none focus:border-vibrant-violet/60 transition-all font-sans text-lg;
 }
 

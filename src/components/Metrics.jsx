@@ -51,8 +51,10 @@ const SafeCountUp = ({ value, suffix }) => {
 
 const Metrics = () => {
   return (
-    <section className="py-32 px-6 border-y border-white/5 bg-background">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-24 md:py-40 px-6 border-y border-white/10 bg-[#020617] relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(139,92,246,0.05),transparent_70%)]" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-24">
           {portfolioData.metrics.map((metric, index) => {
             const config = iconMap[metric.label] || { Icon: CheckIcon, color: "text-vibrant-violet", bg: "bg-vibrant-violet/10" };
@@ -61,19 +63,19 @@ const Metrics = () => {
             return (
               <motion.div
                 key={metric.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
+                transition={{ delay: index * 0.1, duration: 0.8, type: "spring" }}
                 className="flex flex-col items-center text-center group"
               >
-                <div className={`p-4 mb-8 rounded-2xl border border-white/10 ${bg} ${color} transition-transform duration-500 group-hover:scale-110`}>
+                <div className={`p-5 mb-10 rounded-2xl border border-white/10 ${bg} ${color} transition-all duration-700 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] group-hover:-translate-y-2`}>
                   <Icon />
                 </div>
-                <div className={`text-4xl md:text-6xl font-black tracking-tighter mb-4 ${color}`}>
+                <div className={`text-5xl md:text-7xl font-black tracking-tightest mb-6 ${color}`}>
                   <SafeCountUp value={metric.value} suffix={metric.suffix} />
                 </div>
-                <div className="text-[11px] md:text-[12px] font-mono font-bold text-zinc-400 uppercase tracking-[0.2em] leading-tight max-w-[140px]">
+                <div className="text-[12px] md:text-[14px] font-mono font-black text-vibrant-sky/70 uppercase tracking-[0.3em] leading-relaxed max-w-[160px]">
                   {metric.label}
                 </div>
               </motion.div>

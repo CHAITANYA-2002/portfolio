@@ -24,42 +24,42 @@ const ProjectCard = ({ project, index }) => {
         </h3>
 
         <div className="flex items-center gap-4 mb-10">
-           <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest italic">{project.title}</span>
+           <span className="text-[12px] md:text-[14px] font-mono text-vibrant-sky font-bold uppercase tracking-widest italic">{project.title}</span>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-8 md:gap-16 mb-12 md:mb-16">
           <div className="space-y-4">
-            <h4 className="text-[10px] md:text-[11px] font-mono font-black uppercase tracking-widest text-zinc-500">The Problem</h4>
-            <p className="text-sm md:text-base text-zinc-400 leading-relaxed">{project.problem}</p>
+            <h4 className="text-[11px] md:text-[13px] font-mono font-black uppercase tracking-widest text-vibrant-violet/80">The Problem</h4>
+            <p className="text-sm md:text-base text-vibrant-sky/80 leading-relaxed font-medium">{project.problem}</p>
           </div>
           <div className="space-y-4">
-            <h4 className="text-[10px] md:text-[11px] font-mono font-black uppercase tracking-widest text-vibrant-cyan">The Impact</h4>
-            <p className="text-sm md:text-base text-white font-medium leading-relaxed">{project.impact}</p>
+            <h4 className="text-[11px] md:text-[13px] font-mono font-black uppercase tracking-widest text-vibrant-cyan">The Impact</h4>
+            <p className="text-sm md:text-base text-white font-black leading-relaxed">{project.impact}</p>
           </div>
         </div>
 
         <div className="flex gap-8">
-          <button className="impact-link text-[11px] font-mono font-bold uppercase tracking-[0.2em] flex items-center gap-2">
-            Deep Dive <ArrowUpRight size={14} className="inline" />
+          <button className="impact-link text-[12px] md:text-[13px] font-mono font-black uppercase tracking-[0.3em] flex items-center gap-2">
+            System_Deep_Dive <ArrowUpRight size={14} className="inline" />
           </button>
         </div>
       </div>
 
-      {/* Monochromatic Visual Artifact with vibrant glow */}
-      <div className="md:w-1/2 relative bg-white/[0.02] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden aspect-video transition-all duration-1000 border border-white/10 group-hover:border-vibrant-violet/30">
+      {/* Visual Artifact (Vivid Navy Upgrade) */}
+      <div className="md:w-1/2 relative bg-[#020617] rounded-[2rem] md:rounded-[3rem] overflow-hidden aspect-video transition-all duration-1000 border border-white/10 group-hover:border-vibrant-violet/50 shadow-2xl">
         <div className="absolute inset-0 flex items-center justify-center">
-           <div className="w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-vibrant-violet/40 via-transparent to-transparent group-hover:from-vibrant-violet/60 transition-all duration-1000" />
+           <div className="w-full h-full opacity-30 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-vibrant-violet/20 via-transparent to-transparent group-hover:from-vibrant-violet/40 transition-all duration-1000" />
            <div className="relative z-10 p-12 text-center">
-              <span className="font-serif italic text-white/5 text-[8rem] md:text-[15rem] select-none group-hover:text-vibrant-violet/10 transition-all duration-1000">{project.id[0].toUpperCase()}</span>
+              <span className="font-serif italic text-white/10 text-[8rem] md:text-[15rem] select-none group-hover:text-vibrant-violet/20 transition-all duration-1000 drop-shadow-2xl">{project.id[0].toUpperCase()}</span>
            </div>
         </div>
         
-        {/* Detail Annotation */}
-        <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 right-6 md:right-10 flex justify-between items-end opacity-40 group-hover:opacity-100 transition-all duration-1000">
-           <div className="font-mono text-[9px] uppercase tracking-[0.4em] text-zinc-500">
+        {/* Detail Annotation (High-Contrast Sky) */}
+        <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 right-6 md:right-10 flex justify-between items-end opacity-60 group-hover:opacity-100 transition-all duration-1000">
+           <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-vibrant-sky/70 font-bold">
               LOG_GEN // {project.id}
            </div>
-           <div className="font-mono text-[9px] uppercase tracking-[0.4em] text-zinc-500 group-hover:text-vibrant-violet">
+           <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-vibrant-sky/70 group-hover:text-vibrant-violet transition-colors font-bold">
               CORE_V.2026
            </div>
         </div>
