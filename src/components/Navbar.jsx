@@ -1,94 +1,124 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from './Icons';
+import { NavLink, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const navLinks = [
+  { name: 'Projects', href: '/projects' },
+  { name: 'Journey', href: '/journey' },
+  { name: 'Skills', href: '/skills' },
+  { name: 'Contact', href: '/contact' },
+];
+
+const MenuIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <line x1="4" y1="8" x2="20" y2="8"/>
+    <line x1="4" y1="16" x2="20" y2="16"/>
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <line x1="18" y1="6" x2="6" y2="18"/>
+    <line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+);
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Work', href: '#projects' },
-    { name: 'Journey', href: '#experience' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
   return (
-    <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
-      isScrolled ? 'py-4 bg-[#020617]/90 backdrop-blur-2xl border-b border-white/10' : 'py-8 bg-transparent'
-    }`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <motion.a 
-          href="/" 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-2xl font-black tracking-tightest text-white uppercase"
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-[#0B0B0F]/80 backdrop-blur-xl border-b border-white/[0.06] py-4'
+          : 'bg-transparent py-6'
+      }`}
+    >
+      <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between">
+        {/* Logo */}
+        <Link
+          to="/"
+          className="text-sm font-bold tracking-widest text-white uppercase hover:opacity-70 transition-opacity"
         >
-          CK<span className="text-vibrant-violet">_</span>CORE
-        </motion.a>
+          Chaitanya<span className="text-gray-500">.</span>
+        </Link>
 
-        {/* Desktop Links (High-Contrast Sky) */}
-        <div className="hidden md:flex gap-12 items-center">
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              className="text-[12px] font-black uppercase tracking-[0.3em] text-vibrant-sky/70 hover:text-white transition-all font-mono"
+            <NavLink
+              key={link.href}
+              to={link.href}
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? 'text-white bg-white/[0.08]'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                }`
+              }
             >
               {link.name}
-            </a>
+            </NavLink>
           ))}
-          <a 
-            href="#contact" 
-            className="px-8 py-3 rounded-2xl bg-white text-black text-[11px] font-black uppercase tracking-[0.4em] hover:bg-vibrant-violet hover:text-white transition-all shadow-[0_20px_40px_rgba(255,255,255,0.05)]"
+          <Link
+            to="/contact"
+            className="ml-4 btn-primary text-sm"
+            style={{ padding: '8px 18px' }}
           >
-            Initiate
-          </a>
+            Let's Talk
+          </Link>
         </div>
 
-        {/* Mobile Toggle */}
-        <button 
-          className="md:hidden text-white p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden p-2 text-slate-400 hover:text-white transition-colors"
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+          {isMobileOpen ? <CloseIcon /> : <MenuIcon />}
         </button>
       </div>
 
-      {/* Mobile Menu (Saturated Navy) */}
+      {/* Mobile menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-[#020617] border-b border-white/10 p-12 flex flex-col gap-8 md:hidden shadow-3xl overflow-hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="md:hidden overflow-hidden border-t border-white/[0.06] bg-[#0B0B0F]/95 backdrop-blur-xl"
           >
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-3xl font-black uppercase tracking-tightest text-white hover:text-vibrant-cyan transition-colors"
+            <div className="px-6 py-6 flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.href}
+                  to={link.href}
+                  onClick={() => setIsMobileOpen(false)}
+                  className={({ isActive }) =>
+                    `px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                      isActive ? 'text-white bg-white/[0.08]' : 'text-slate-400 hover:text-white'
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+              <Link
+                to="/contact"
+                onClick={() => setIsMobileOpen(false)}
+                className="mt-4 btn-primary text-center text-sm"
               >
-                {link.name}
-              </a>
-            ))}
-            <a 
-              href="#contact" 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-6 w-full py-5 text-center rounded-2xl bg-white text-black text-[12px] font-black uppercase tracking-[0.4em]"
-            >
-              Initiate_Contact
-            </a>
+                Let's Talk
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

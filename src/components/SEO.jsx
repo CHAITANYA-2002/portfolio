@@ -1,33 +1,45 @@
-import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { portfolioData } from '../data/portfolio';
+import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
+
+const pageMeta = {
+  '/': {
+    title: 'Chaitanya Khurana — Technical Product Manager & AI Builder',
+    description: 'Portfolio of Chaitanya Khurana — Technical PM shipping AI products with measurable outcomes across fintech, automation, and data engineering.',
+  },
+  '/projects': {
+    title: 'Projects — Chaitanya Khurana',
+    description: 'Explore AI products, fintech systems, and data engineering projects built by Chaitanya Khurana.',
+  },
+  '/journey': {
+    title: 'Journey — Chaitanya Khurana',
+    description: 'From engineering foundations to AI product leadership — the narrative arc of Chaitanya Khurana\'s career.',
+  },
+  '/skills': {
+    title: 'Skills — Chaitanya Khurana',
+    description: 'Product leadership, AI/ML engineering, and cloud ecosystem skills of Chaitanya Khurana.',
+  },
+  '/contact': {
+    title: 'Contact — Chaitanya Khurana',
+    description: 'Get in touch with Chaitanya Khurana for PM engagements, AI product partnerships, or consulting.',
+  },
+};
 
 const SEO = () => {
-  const title = `${portfolioData.name} | ${portfolioData.headline}`;
-  const description = `${portfolioData.name} is a Technical Product Manager specializing in AI/ML and full-stack development. ${portfolioData.heroHeadline}.`;
-  
+  const location = useLocation();
+  const meta = pageMeta[location.pathname] || pageMeta['/'];
+
   return (
-    <HelmetProvider>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content="https://chaitanyak.com" />
-        
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        
-        {/* Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;700;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
-      </Helmet>
-    </HelmetProvider>
+    <Helmet>
+      <title>{meta.title}</title>
+      <meta name="description" content={meta.description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={meta.title} />
+      <meta property="og:description" content={meta.description} />
+      <meta property="og:url" content={`https://chaitanyak.com${location.pathname}`} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={meta.title} />
+      <meta name="twitter:description" content={meta.description} />
+    </Helmet>
   );
 };
 

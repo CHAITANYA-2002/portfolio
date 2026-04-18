@@ -1,20 +1,30 @@
+import { Link } from 'react-router-dom';
 import { portfolioData } from '../data/portfolio';
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
-    <footer className="py-12 px-6 border-t border-white/5">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex flex-col items-center md:items-start">
-          <span className="text-xl font-bold tracking-tightest impact-gradient mb-2">CK.</span>
-          <p className="text-xs text-muted">© 2026 {portfolioData.name}. Built with React, Tailwind, and Outcome-first thinking.</p>
+    <footer className="border-t border-white/[0.06] py-10 px-6">
+      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col items-center md:items-start gap-1">
+          <span className="text-sm font-bold text-white" style={{ letterSpacing: '0.1em' }}>
+            Chaitanya<span className="text-gray-500">.</span>
+          </span>
+          <p className="text-xs text-slate-500">
+            © {year} {portfolioData.name}. Built with React & Framer Motion.
+          </p>
         </div>
-
-        <div className="flex gap-8">
-          <a href="#projects" className="text-xs font-bold tracking-widest uppercase text-muted hover:text-white transition-colors">Work</a>
-          <a href="#experience" className="text-xs font-bold tracking-widest uppercase text-muted hover:text-white transition-colors">Experience</a>
-          <a href="#skills" className="text-xs font-bold tracking-widest uppercase text-muted hover:text-white transition-colors">Skills</a>
-          <a href="mailto:chaitanya100502@gmail.com" className="text-xs font-bold tracking-widest uppercase text-muted hover:text-white transition-colors">Contact</a>
-        </div>
+        <nav className="flex gap-6">
+          {[['Projects', '/projects'], ['Journey', '/journey'], ['Skills', '/skills'], ['Contact', '/contact']].map(([label, href]) => (
+            <Link
+              key={href}
+              to={href}
+              className="text-xs font-medium text-slate-500 hover:text-white transition-colors uppercase tracking-widest"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
       </div>
     </footer>
   );

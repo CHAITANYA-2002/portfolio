@@ -1,53 +1,31 @@
-import { motion } from 'framer-motion';
-import TimelineItem from './TimelineItem';
 import { portfolioData } from '../data/portfolio';
 
-const Experience = () => {
-  const { experience } = portfolioData;
-
-  return (
-    <section id="experience" className="py-32 px-6 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-
-        {/* Section header - Centered for Zigzag layout */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-32 flex flex-col items-center"
-        >
-          <div className="annotation mb-6">
-            <span className="w-8 h-px bg-accent" /> THE CHRONICLE // IMPACT OVER TIME
-          </div>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tightest leading-[0.9] mb-8">
-            The Arc of <br />
-            <span className="italic font-serif text-white/90">Execution.</span>
-          </h2>
-          <p className="text-muted text-lg max-w-2xl leading-relaxed">
-            From deep technical engineering to orchestrating AI product strategy. A sequence of measurable outcomes and technical foundations.
-          </p>
-        </motion.div>
-
-        {/* Timeline Container */}
-        <div className="relative">
-          {/* Centered Vertical Line - Desktop Only */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-accent/5 via-accent/30 to-transparent hidden md:block" />
-
-          <div className="flex flex-col gap-0 relative">
-            {experience.map((exp, index) => (
-              <TimelineItem
-                key={`${exp.company}-${index}`}
-                exp={exp}
-                index={index}
-                isLast={index === experience.length - 1}
-              />
-            ))}
-          </div>
-        </div>
+const Experience = () => (
+  <section id="experience" className="py-24 px-6">
+    <div className="max-w-[1200px] mx-auto">
+      <p className="label mb-6">Experience</p>
+      <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tightest mb-12">
+        Outcomes over time.
+      </h2>
+      <div className="flex flex-col border-t border-white/[0.06]">
+        {portfolioData.experience.map((exp) => (
+          <article key={`${exp.company}-${exp.duration}`} className="grid md:grid-cols-[240px_1fr] gap-6 py-10 border-b border-white/[0.06]">
+            <div>
+              <p className="text-sm text-white font-semibold">{exp.company}</p>
+              <p className="text-xs text-gray-500 mt-1">{exp.duration}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-3">{exp.role}</h3>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-2xl mb-5">{exp.summary}</p>
+              <div className="flex flex-wrap gap-2">
+                {exp.tech.map((item) => <span key={item} className="chip">{item}</span>)}
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Experience;
