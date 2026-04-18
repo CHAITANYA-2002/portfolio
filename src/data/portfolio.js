@@ -14,23 +14,77 @@ export const portfolioData = {
 
   projects: [
     {
-      id: "ai-freetec",
-      title: "Self-Employed (Freelance)",
-      outcome: "3 AI Products Shipped",
-      problem: "Startups needed rapid prototyping and deployment of production-ready AI agents within tight deadlines.",
-      impact: "Delivered 3 end-to-end products in 6 week cycles, reducing manual reporting time by 30%.",
-      approach: "Built scalable RAG architectures using LangChain and Flask, focusing on high-accuracy semantic search.",
-      tags: ["AI Orchestration", "RAG", "Flask"],
+      id: "loan-app",
+      title: "Loan App",
+      outcome: "20% Default Reduction",
+      problem: "Loan evaluation needed a clearer application flow and smarter risk signals before approval decisions.",
+      impact: "Built a loan workflow with ML-assisted credit scoring that reduced default rates by 20%.",
+      approach: "Designed borrower intake, eligibility checks, scoring logic, and dashboards for decision visibility.",
+      tags: ["FinTech", "Credit Risk", "TensorFlow"],
       featured: true
     },
     {
-      id: "credit-risk",
-      title: "Aru Technologies",
-      outcome: "20% Default Reduction",
-      problem: "Financial legacy systems lacked predictive depth, leading to higher-than-average loan defaults.",
-      impact: "Reduced loan default rates by 20% using a proprietary ML-based credit scoring system.",
-      approach: "Engineered deep learning models using TensorFlow to analyze unconventional data points for creditworthiness.",
-      tags: ["Machine Learning", "FinTech", "Analytics"]
+      id: "raspberry-pi-chatbot",
+      title: "Chatbot on Raspberry Pi 5",
+      outcome: "Edge AI Assistant",
+      problem: "Teams needed a compact local assistant that could respond quickly without relying on a full cloud setup.",
+      impact: "Prototyped a Raspberry Pi 5 chatbot for lightweight on-device interaction and automation.",
+      approach: "Combined Python services, prompt flows, and hardware-friendly deployment constraints.",
+      tags: ["Raspberry Pi", "Python", "AI Assistant"]
+    },
+    {
+      id: "healthcare-bi-admin",
+      title: "Healthcare Admin & BI Dashboard",
+      outcome: "Business Intelligence System",
+      problem: "A healthcare firm needed admin workflows and leadership dashboards in one operational view.",
+      impact: "Designed an admin system with BI dashboards for cleaner reporting and faster business review cycles.",
+      approach: "Mapped roles, operational data views, KPI modules, and reporting screens for healthcare stakeholders.",
+      tags: ["Healthcare", "BI Dashboard", "Admin System"]
+    },
+    {
+      id: "healthcare-website",
+      title: "Healthcare Firm Website",
+      outcome: "Trust-first Web Presence",
+      problem: "The firm needed a credible website that made services, trust signals, and contact paths easy to understand.",
+      impact: "Created a clean healthcare website focused on clarity, conversion, and professional brand presence.",
+      approach: "Structured service pages, responsive layouts, contact flows, and calm visual hierarchy.",
+      tags: ["Healthcare", "Website", "UX"]
+    },
+    {
+      id: "expense-insights",
+      title: "Personal Expense Insights",
+      outcome: "Spending Visibility",
+      problem: "Users often struggle to understand where their money goes across categories and recurring expenses.",
+      impact: "Built a simple fintech dashboard that categorizes expenses and highlights monthly spending patterns.",
+      approach: "Focused on readable charts, budget thresholds, and lightweight transaction tagging.",
+      tags: ["FinTech", "Dashboard", "Analytics"]
+    },
+    {
+      id: "invoice-tracker",
+      title: "Invoice & Payment Tracker",
+      outcome: "Cleaner Cashflow Tracking",
+      problem: "Small teams needed a basic way to track invoices, due dates, and payment status without complex ERP tools.",
+      impact: "Created a simple invoice tracker for receivables, reminders, and cashflow visibility.",
+      approach: "Designed status states, aging buckets, due-date views, and export-friendly reports.",
+      tags: ["FinTech", "Payments", "Operations"]
+    },
+    {
+      id: "emi-calculator",
+      title: "EMI & Affordability Planner",
+      outcome: "Loan Planning Utility",
+      problem: "Borrowers needed a quick way to compare tenure, interest, EMI, and affordability before applying.",
+      impact: "Built a clear EMI planning tool that helps users compare scenarios before choosing a loan option.",
+      approach: "Modeled EMI calculations, affordability bands, and simple scenario comparison.",
+      tags: ["FinTech", "Calculator", "UX"]
+    },
+    {
+      id: "portfolio-risk-lite",
+      title: "Portfolio Risk Lite",
+      outcome: "Risk Snapshot",
+      problem: "Beginner investors needed a simple overview of allocation risk without complex trading software.",
+      impact: "Created a lightweight dashboard that summarizes allocation, exposure, and basic risk signals.",
+      approach: "Used simple asset grouping, visual summaries, and plain-language risk indicators.",
+      tags: ["FinTech", "Investing", "Dashboard"]
     }
   ],
 

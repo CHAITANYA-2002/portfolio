@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { name: 'Projects', href: '/projects' },
-  { name: 'Journey', href: '/journey' },
-  { name: 'Skills', href: '/skills' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Journey', href: '#journey' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Research', href: '#research' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 const MenuIcon = () => (
@@ -43,37 +43,31 @@ const Navbar = () => {
     >
       <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          to="/"
+        <a
+          href="#home"
           className="text-sm font-bold tracking-widest text-white uppercase hover:opacity-70 transition-opacity"
         >
-          Chaitanya<span className="text-gray-500">.</span>
-        </Link>
+          Chaitanya<span className="text-[#C7B27A]">.</span>
+        </a>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <NavLink
+            <a
               key={link.href}
-              to={link.href}
-              className={({ isActive }) =>
-                `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? 'text-white bg-white/[0.08]'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
-                }`
-              }
+              href={link.href}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-200"
             >
               {link.name}
-            </NavLink>
+            </a>
           ))}
-          <Link
-            to="/contact"
+          <a
+            href="#contact"
             className="ml-4 btn-primary text-sm"
             style={{ padding: '8px 18px' }}
           >
             Let's Talk
-          </Link>
+          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -98,26 +92,22 @@ const Navbar = () => {
           >
             <div className="px-6 py-6 flex flex-col gap-1">
               {navLinks.map((link) => (
-                <NavLink
+                <a
                   key={link.href}
-                  to={link.href}
+                  href={link.href}
                   onClick={() => setIsMobileOpen(false)}
-                  className={({ isActive }) =>
-                    `px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                      isActive ? 'text-white bg-white/[0.08]' : 'text-slate-400 hover:text-white'
-                    }`
-                  }
+                  className="px-4 py-3 rounded-lg text-base font-medium text-gray-400 hover:text-white transition-colors"
                 >
                   {link.name}
-                </NavLink>
+                </a>
               ))}
-              <Link
-                to="/contact"
+              <a
+                href="#contact"
                 onClick={() => setIsMobileOpen(false)}
                 className="mt-4 btn-primary text-center text-sm"
               >
                 Let's Talk
-              </Link>
+              </a>
             </div>
           </motion.div>
         )}
