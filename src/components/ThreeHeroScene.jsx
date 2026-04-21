@@ -12,8 +12,8 @@ const ThreeHeroScene = () => {
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
     camera.position.set(0, 0.15, 7);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.35));
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
 
@@ -38,7 +38,7 @@ const ThreeHeroScene = () => {
     });
 
     const knot = new THREE.Mesh(
-      new THREE.TorusKnotGeometry(1.34, 0.18, 180, 16),
+      new THREE.TorusKnotGeometry(1.34, 0.18, 96, 10),
       shellMaterial,
     );
     group.add(knot);
@@ -57,8 +57,8 @@ const ThreeHeroScene = () => {
 
     [1.9, 2.35, 2.8].forEach((radius, index) => {
       const points = [];
-      for (let i = 0; i <= 160; i += 1) {
-        const angle = (i / 160) * Math.PI * 2;
+      for (let i = 0; i <= 96; i += 1) {
+        const angle = (i / 96) * Math.PI * 2;
         points.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius, 0));
       }
       const orbit = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), orbitMaterial);
@@ -67,7 +67,7 @@ const ThreeHeroScene = () => {
       group.add(orbit);
     });
 
-    const particleCount = 140;
+    const particleCount = 84;
     const positions = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i += 1) {
       const radius = 2.6 + Math.random() * 2.4;

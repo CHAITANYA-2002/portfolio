@@ -7,21 +7,13 @@ const pageMeta = {
     title: 'Chaitanya Khurana | Technical Product Manager for AI, FinTech & Data Products',
     description: 'Chaitanya Khurana is a Technical Product Manager and AI builder creating fintech systems, healthcare BI dashboards, RAG products, and data-driven automation.',
   },
-  '/projects': {
-    title: 'Projects — Chaitanya Khurana',
-    description: 'Explore AI products, fintech systems, and data engineering projects built by Chaitanya Khurana.',
-  },
-  '/journey': {
-    title: 'Journey — Chaitanya Khurana',
-    description: 'From engineering foundations to AI product leadership — the narrative arc of Chaitanya Khurana\'s career.',
-  },
-  '/skills': {
-    title: 'Skills — Chaitanya Khurana',
-    description: 'Product leadership, AI/ML engineering, and cloud ecosystem skills of Chaitanya Khurana.',
-  },
   '/contact': {
     title: 'Contact — Chaitanya Khurana',
     description: 'Get in touch with Chaitanya Khurana for PM engagements, AI product partnerships, or consulting.',
+  },
+  '/experiments': {
+    title: 'Experiments & Technical Lab — Chaitanya Khurana',
+    description: 'A real-time showcase of GitHub repositories, technical experiments, and continuous learning by Chaitanya Khurana.',
   },
 };
 
@@ -67,7 +59,7 @@ const SEO = () => {
       '@type': 'CreativeWork',
       name: project.title,
       description: project.impact,
-      keywords: project.tags.join(', '),
+      keywords: [...(project.techStack || []), ...(project.hardSkills || [])].join(', '),
     })),
   };
 

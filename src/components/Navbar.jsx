@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { name: 'Projects', href: '#projects' },
-  { name: 'Journey', href: '#journey' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Research', href: '#research' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Projects', href: '/#projects' },
+  { name: 'Skills', href: '/#skills' },
+  { name: 'Experiments', href: '/experiments' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 const MenuIcon = () => (
@@ -43,31 +43,35 @@ const Navbar = () => {
     >
       <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a
-          href="#home"
+        <Link
+          to="/"
           className="text-sm font-bold tracking-widest text-white uppercase hover:opacity-70 transition-opacity"
         >
           Chaitanya<span className="text-[#C7B27A]">.</span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-200"
+              to={link.href}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                location.pathname + location.hash === link.href || (location.pathname === '/' && link.href.startsWith('/#') && location.hash === link.href.split('/')[1])
+                  ? 'text-white bg-white/10' 
+                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
             >
               {link.name}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="ml-4 btn-primary text-sm"
             style={{ padding: '8px 18px' }}
           >
             Let's Talk
-          </a>
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -92,22 +96,24 @@ const Navbar = () => {
           >
             <div className="px-6 py-6 flex flex-col gap-1">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  to={link.href}
                   onClick={() => setIsMobileOpen(false)}
-                  className="px-4 py-3 rounded-lg text-base font-medium text-gray-400 hover:text-white transition-colors"
+                  className={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                    location.pathname + location.hash === link.href ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white'
+                  }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
                 onClick={() => setIsMobileOpen(false)}
                 className="mt-4 btn-primary text-center text-sm"
               >
                 Let's Talk
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
