@@ -42,20 +42,32 @@ const metricNotes = {
 
 const tagTone = (tag) => {
   const value = tag.toLowerCase();
-  // Tech Stack (Tools)
-  if (value.includes('python') || value.includes('langchain') || value.includes('tensorflow') || value.includes('flask') || value.includes('sql') || value.includes('matlab') || value.includes('latex') || value.includes('opencv') || value.includes('embedded c')) return 'tone-sapphire';
-  if (value.includes('azure') || value.includes('docker') || value.includes('mern') || value.includes('devops') || value.includes('github actions')) return 'tone-amber';
-  if (value.includes('salesforce') || value.includes('selenium') || value.includes('jira')) return 'tone-gold';
   
-  // Hard Skills
-  if (value.includes('rag') || value.includes('prompt') || value.includes('modeling') || value.includes('statistical') || value.includes('analytics') || value.includes('eda') || value.includes('watermarking') || value.includes('steganography') || value.includes('retinal') || value.includes('biomedical') || value.includes('benchmarking')) return 'tone-emerald';
-  if (value.includes('testing') || value.includes('qa') || value.includes('automation') || value.includes('optimization')) return 'tone-emerald';
-  if (value.includes('api') || value.includes('microservices') || value.includes('migration')) return 'tone-emerald';
-
-  // Soft Skills / Product / Business
-  if (value.includes('strategy') || value.includes('vision') || value.includes('kpi') || value.includes('ab testing') || value.includes('experimentation') || value.includes('decision') || value.includes('journey mapping') || value.includes('analytics') || value.includes('monetization') || value.includes('pricing') || value.includes('competitive')) return 'tone-violet';
-  if (value.includes('roadmapping') || value.includes('management') || value.includes('leadership') || value.includes('collaboration') || value.includes('communication') || value.includes('presentation') || value.includes('storytelling') || value.includes('academic') || value.includes('drafting') || value.includes('research') || value.includes('innovation')) return 'tone-violet';
-  if (value.includes('requirement') || value.includes('stakeholder') || value.includes('problem solving') || value.includes('architecture') || value.includes('mece') || value.includes('prd') || value.includes('rfc') || value.includes('negotiation') || value.includes('influence')) return 'tone-violet';
+  // STACK (Tools / Languages / Frameworks) -> Sapphire
+  if (value.includes('python') || value.includes('tensorflow') || value.includes('flask') || value.includes('sql') || 
+      value.includes('react') || value.includes('javascript') || value.includes('vite') || value.includes('typescript') ||
+      value.includes('node') || value.includes('express') || value.includes('mongo') || value.includes('mern') ||
+      value.includes('azure') || value.includes('docker') || value.includes('github actions') || value.includes('devops') ||
+      value.includes('c++') || value.includes('cpp') || value.includes('jupyter') || value.includes('notebook') ||
+      value.includes('html') || value.includes('css') || value.includes('selenium') || value.includes('jira') ||
+      value.includes('langchain') || value.includes('opencv') || value.includes('embedded c')) 
+    return 'tone-sapphire';
+    
+  // CORE (Hard Skills / Techniques / Hard Skills / Methodologies) -> Emerald
+  if (value.includes('modeling') || value.includes('risk') || value.includes('data engineering') || value.includes('dashboarding') ||
+      value.includes('rag') || value.includes('prompt') || value.includes('statistical') || value.includes('analytics') || 
+      value.includes('eda') || value.includes('optimization') || value.includes('testing') || value.includes('qa') ||
+      value.includes('benchmarking') || value.includes('watermarking') || value.includes('steganography') || 
+      value.includes('retinal') || value.includes('biomedical'))
+    return 'tone-emerald';
+    
+  // LEAD (Product / Strategy / Soft Skills / Vision) -> Violet
+  if (value.includes('strategy') || value.includes('vision') || value.includes('product') || value.includes('fintech') ||
+      value.includes('ux') || value.includes('mapping') || value.includes('monetization') || value.includes('pricing') ||
+      value.includes('requirement') || value.includes('stakeholder') || value.includes('management') || value.includes('leadership') ||
+      value.includes('innovation') || value.includes('academic') || value.includes('research') || value.includes('collaboration') ||
+      value.includes('communication') || value.includes('presentation') || value.includes('storytelling') || value.includes('roadmapping'))
+    return 'tone-violet';
 
   return 'tone-ivory';
 };
@@ -122,7 +134,9 @@ const ProjectCard = ({ project, index, active, onSelect }) => (
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Stack</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                <span className="w-[1px] h-3 bg-stone-600/60" /> STACK
+              </p>
               <div className="flex flex-wrap gap-2">
                 {project.techStack.map((item) => (
                   <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
@@ -136,7 +150,9 @@ const ProjectCard = ({ project, index, active, onSelect }) => (
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Core</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                <span className="w-[1px] h-3 bg-stone-600/60" /> CORE
+              </p>
               <div className="flex flex-wrap gap-2">
                 {project.hardSkills.map((item) => (
                   <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
@@ -150,7 +166,9 @@ const ProjectCard = ({ project, index, active, onSelect }) => (
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Lead</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                <span className="w-[1px] h-3 bg-stone-600/60" /> LEAD
+              </p>
               <div className="flex flex-wrap gap-2">
                 {project.softSkills.map((item) => (
                   <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
@@ -279,7 +297,9 @@ const JourneyTheater = ({ activeIndex, setActiveIndex }) => {
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.25 }}
                         >
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Stack</p>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2 flex items-center gap-2">
+                            <span className="w-[1px] h-3 bg-stone-600/60" /> STACK
+                          </p>
                           <div className="flex flex-wrap gap-2">
                             {exp.techStack.map((item) => (
                               <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
@@ -293,7 +313,9 @@ const JourneyTheater = ({ activeIndex, setActiveIndex }) => {
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.35 }}
                         >
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Core</p>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2 flex items-center gap-2">
+                            <span className="w-[1px] h-3 bg-stone-600/60" /> CORE
+                          </p>
                           <div className="flex flex-wrap gap-2">
                             {exp.hardSkills.map((item) => (
                               <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
@@ -307,7 +329,9 @@ const JourneyTheater = ({ activeIndex, setActiveIndex }) => {
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.45 }}
                         >
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Lead</p>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2 flex items-center gap-2">
+                            <span className="w-[1px] h-3 bg-stone-600/60" /> LEAD
+                          </p>
                           <div className="flex flex-wrap gap-2">
                             {exp.softSkills.map((item) => (
                               <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
@@ -358,8 +382,8 @@ const SkillsConstellation = () => {
               <span className="section-kicker">Constellation {String(categoryIndex + 1).padStart(2, '0')}</span>
             </div>
             
-            <h3 className="mt-8 text-2xl md:text-3xl font-semibold text-white tracking-normal leading-tight">
-              {category}
+            <h3 className="mt-8 text-2xl md:text-3xl font-semibold text-white tracking-normal leading-tight flex items-center gap-3">
+              <span className="w-[1.5px] h-8 bg-[#C7B27A]/40" /> {category}
             </h3>
 
             <AnimatePresence initial={false}>
@@ -498,7 +522,9 @@ const ResearchShowcase = () => {
           <div className="space-y-5 pt-8 mt-5 border-t border-white/5">
             {/* Tech Stack */}
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Stack</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                <span className="w-[1px] h-3 bg-stone-600/60" /> STACK
+              </p>
               <div className="flex flex-wrap gap-2">
                 {item.techStack.map((v) => (
                   <span key={v} className={`tech-pill ${tagTone(v)}`}>{v}</span>
@@ -508,7 +534,9 @@ const ResearchShowcase = () => {
 
             {/* Hard Skills */}
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Core</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                <span className="w-[1px] h-3 bg-stone-600/60" /> CORE
+              </p>
               <div className="flex flex-wrap gap-2">
                 {item.hardSkills.map((v) => (
                   <span key={v} className={`tech-pill ${tagTone(v)}`}>{v}</span>
@@ -518,7 +546,9 @@ const ResearchShowcase = () => {
 
             {/* Soft Skills */}
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">Lead</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                <span className="w-[1px] h-3 bg-stone-600/60" /> LEAD
+              </p>
               <div className="flex flex-wrap gap-2">
                 {item.softSkills.map((v) => (
                   <span key={v} className={`tech-pill ${tagTone(v)}`}>{v}</span>
@@ -640,7 +670,9 @@ const CredentialsShowcase = () => {
 
               <div>
                 <div className="flex justify-between items-center mb-5 px-1">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400">Coursework Pipeline</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 flex items-center gap-2">
+                    <span className="w-[1px] h-3 bg-stone-600/60" /> Coursework Pipeline
+                  </p>
                   <p className="text-[9px] font-mono text-emerald-500/60 uppercase">CORE_MODULES // SYNCED</p>
                 </div>
                 <div className="flex flex-wrap gap-3">
@@ -738,7 +770,9 @@ const CredentialsShowcase = () => {
                   </div>
 
                   <div className="mb-6">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 group-hover:text-[#C7B27A]/80 transition-colors">Validated Competencies</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 group-hover:text-[#C7B27A]/80 transition-colors flex items-center gap-2">
+                       <span className="w-[1px] h-3 bg-stone-600/60" /> Validated Competencies
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {cert.competencies.map((comp) => (
                         <span key={comp} className={`tech-pill text-[10px] ${tagTone(comp)} group-hover:brightness-110`}>

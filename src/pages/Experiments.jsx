@@ -15,14 +15,33 @@ const TerminalIcon = () => (
 
 const tagTone = (tag) => {
   const value = tag.toLowerCase();
-  if (value.includes('python') || value.includes('langchain') || value.includes('tensorflow') || value.includes('flask') || value.includes('sql') || value.includes('matlab') || value.includes('latex') || value.includes('opencv') || value.includes('embedded c')) return 'tone-sapphire';
-  if (value.includes('azure') || value.includes('docker') || value.includes('mern') || value.includes('devops') || value.includes('github actions')) return 'tone-amber';
-  if (value.includes('salesforce') || value.includes('selenium') || value.includes('jira')) return 'tone-gold';
-  if (value.includes('rag') || value.includes('prompt') || value.includes('modeling') || value.includes('statistical') || value.includes('analytics') || value.includes('eda') || value.includes('watermarking') || value.includes('steganography') || value.includes('retinal') || value.includes('biomedical') || value.includes('benchmarking')) return 'tone-emerald';
-  if (value.includes('testing') || value.includes('qa') || value.includes('automation') || value.includes('optimization')) return 'tone-emerald';
-  if (value.includes('api') || value.includes('microservices') || value.includes('migration')) return 'tone-emerald';
-  if (value.includes('roadmapping') || value.includes('management') || value.includes('leadership') || value.includes('collaboration') || value.includes('communication') || value.includes('presentation') || value.includes('storytelling') || value.includes('academic') || value.includes('drafting') || value.includes('research') || value.includes('innovation')) return 'tone-violet';
-  if (value.includes('requirement') || value.includes('stakeholder') || value.includes('problem solving') || value.includes('architecture')) return 'tone-violet';
+  
+  // STACK (Tools / Languages / Frameworks) -> Sapphire
+  if (value.includes('python') || value.includes('tensorflow') || value.includes('flask') || value.includes('sql') || 
+      value.includes('react') || value.includes('javascript') || value.includes('vite') || value.includes('typescript') ||
+      value.includes('node') || value.includes('express') || value.includes('mongo') || value.includes('mern') ||
+      value.includes('azure') || value.includes('docker') || value.includes('github actions') || value.includes('devops') ||
+      value.includes('c++') || value.includes('cpp') || value.includes('jupyter') || value.includes('notebook') ||
+      value.includes('html') || value.includes('css') || value.includes('selenium') || value.includes('jira') ||
+      value.includes('langchain') || value.includes('opencv') || value.includes('embedded c')) 
+    return 'tone-sapphire';
+    
+  // CORE (Hard Skills / Techniques / Hard Skills / Methodologies) -> Emerald
+  if (value.includes('modeling') || value.includes('risk') || value.includes('data engineering') || value.includes('dashboarding') ||
+      value.includes('rag') || value.includes('prompt') || value.includes('statistical') || value.includes('analytics') || 
+      value.includes('eda') || value.includes('optimization') || value.includes('testing') || value.includes('qa') ||
+      value.includes('benchmarking') || value.includes('watermarking') || value.includes('steganography') || 
+      value.includes('retinal') || value.includes('biomedical'))
+    return 'tone-emerald';
+    
+  // LEAD (Product / Strategy / Soft Skills / Vision) -> Violet
+  if (value.includes('strategy') || value.includes('vision') || value.includes('product') || value.includes('fintech') ||
+      value.includes('ux') || value.includes('mapping') || value.includes('monetization') || value.includes('pricing') ||
+      value.includes('requirement') || value.includes('stakeholder') || value.includes('management') || value.includes('leadership') ||
+      value.includes('innovation') || value.includes('academic') || value.includes('research') || value.includes('collaboration') ||
+      value.includes('communication') || value.includes('presentation') || value.includes('storytelling') || value.includes('roadmapping'))
+    return 'tone-violet';
+
   return 'tone-ivory';
 };
 
@@ -66,16 +85,53 @@ const Experiments = () => {
       rationale: 'Created to push the boundaries of LLM grounding. This experiment focuses on minimizing hallucination by bridging unstructured data with structured retrieval pipelines using modern RAG architectures.',
       capabilities: ['Semantic Data Retrieval', 'Context-aware Prompting', 'Vector Database Integration'],
       offerings: ['LangChain', 'Python', 'OpenAI', 'Pinecone']
+    },
+    'nlp': {
+      architecture: 'BERT // Python // Transformer // NLP',
+      rationale: 'A deep dive into advanced Natural Language Processing pipelines, focusing on BERT architectures, subword tokenization, and semantic alignment for high-fidelity sequence labeling.',
+      capabilities: ['Bert Feature Extraction', 'Subword Alignment', 'Deep Learning Pipeline'],
+      offerings: ['Python', 'BERT', 'PyTorch', 'HuggingFace', 'NLP']
+    },
+    'mern': {
+      architecture: 'MongoDB // Express // React // Node',
+      rationale: 'Orchestrating complex full-stack architectures using the MERN stack. This repository explores scalable service design, state synchronization, and robust API contracts.',
+      capabilities: ['Full-stack Integration', 'RESTful Middleware', 'State Orchestration'],
+      offerings: ['MongoDB', 'Express', 'React', 'Node.js']
+    },
+    'city-trail': {
+      architecture: 'TypeScript // Leaflet // GeoJSON',
+      rationale: 'An exploration of geographic data systems and pathfinding algorithms, delivering performant spatial visualizations and interactive trail mapping logic.',
+      capabilities: ['Spatial Data Rendering', 'Pathfinding Algorithms', 'Interactive Geospatial UI'],
+      offerings: ['TypeScript', 'Leaflet', 'GeoJSON', 'React']
+    },
+    'machine-learning': {
+      architecture: 'Scikit-Learn // Pandas // Matplotlib',
+      rationale: 'A comprehensive laboratory of core ML algorithms, from statistical regression to deep neural ensembles, focused on theoretical validation and model performance benchmarking.',
+      capabilities: ['Algorithmic Prototyping', 'Performance Analytics', 'Statistical Modeling'],
+      offerings: ['Jupyter', 'Scikit-Learn', 'Pandas', 'MLOps']
+    },
+    'bad_data': {
+      architecture: 'EDA // Pandas // Seaborn',
+      rationale: 'Engineering robustness for messy datasets. This experiment focuses on outlier detection, data imputation, and high-integrity EDA pipelines to ensure model reliability.',
+      capabilities: ['Anomaly Detection', 'Data Cleaning Pipeline', 'Exploratory Visualization'],
+      offerings: ['Python', 'EDA', 'Data Science', 'Statistics']
+    },
+    'leetcode-problems': {
+      architecture: 'C++ // DSA // Optimization',
+      rationale: 'Performance-first algorithmic implementations and data structure optimizations, focused on time-complexity minimization and clean engineering patterns.',
+      capabilities: ['Algorithm Optimization', 'Data Structure Mastery', 'Competitive Engineering'],
+      offerings: ['C++', 'DSA', 'Problem Solving', 'Algorithms']
     }
   };
 
   const getLanguageStyles = (lang) => {
     const l = lang?.toLowerCase() || '';
-    if (l.includes('python')) return { text: 'text-sapphire', border: 'border-sapphire/20', glow: 'bg-sapphire/5' };
-    if (l.includes('javascript') || l.includes('react') || l.includes('vite')) return { text: 'text-gold', border: 'border-gold/20', glow: 'bg-gold/5' };
-    if (l.includes('html') || l.includes('css')) return { text: 'text-emerald', border: 'border-emerald/20', glow: 'bg-emerald/5' };
-    if (l.includes('jupyter') || l.includes('notebook')) return { text: 'text-orange-500', border: 'border-orange-500/20', glow: 'bg-orange-500/5' };
-    return { text: 'text-stone-500', border: 'border-white/10', glow: 'bg-white/5' };
+    // Consistent Golden Dossier Accents
+    if (l.includes('python') || l.includes('jupyter')) return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
+    if (l.includes('javascript') || l.includes('react') || l.includes('typescript')) return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
+    if (l.includes('html') || l.includes('css')) return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
+    if (l.includes('c++')) return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
+    return { text: 'text-white/40', border: 'border-white/10', glow: 'from-stone-500/10', color: '#C7B27A' };
   };
 
   useEffect(() => {
@@ -208,22 +264,30 @@ const Experiments = () => {
                     onMouseMove={(e) => handleMouseMove(e, repo.id)}
                     transition={{ duration: 0.8, delay: i * 0.05 }}
                     key={repo.id}
-                    className="artifact-card group flex flex-col h-full relative overflow-hidden"
+                    className="research-card group flex flex-col h-full relative overflow-hidden"
                     style={{
                       background: 'rgba(255, 255, 255, 0.08)',
-                      backdropFilter: 'blur(20px)',
-                      WebkitBackdropFilter: 'blur(20px)'
+                      backdropFilter: 'blur(24px)',
+                      WebkitBackdropFilter: 'blur(24px)',
+                      boxShadow: '0 24px 60px rgba(0, 0, 0, 0.5)',
+                      padding: '40px'
                     }}
                   >
+                    {/* Atmospheric Background Lighting */}
+                    <div className="premium-card-glow" aria-hidden="true" />
+                    
+                    {/* Language Accent Glow */}
+                    <div className={`absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r ${styles.glow} to-transparent opacity-50 z-20`} />
+                    
                     {/* Swiping Light Interaction */}
                     <motion.div 
-                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
                       style={{
-                        background: mousePosition.id === repo.id ? `radial-gradient(500px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(199, 178, 122, 0.08), transparent 40%)` : ''
+                        background: mousePosition.id === repo.id ? `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, ${styles.color}20, transparent 40%)` : ''
                       }}
                     />
                     
-                    <div className="flex items-center justify-between mb-10 z-10 w-full relative">
+                    <div className="flex items-center justify-between mb-10 z-20 w-full relative">
                       <div className="flex items-center gap-3">
                         <span className={`px-3 py-1 rounded-full font-mono text-[9px] font-bold border ${styles.border} ${styles.text}`}>
                           {repo.language?.toUpperCase() || 'TECHNICAL'}
@@ -240,17 +304,17 @@ const Experiments = () => {
                       </div>
                     </div>
 
-                    <div className="flex-1 w-full text-left z-10 space-y-10 relative">
+                    <div className="flex-1 w-full text-left z-20 space-y-10 relative">
                       <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-gold transition-colors duration-500 leading-tight">
+                        <h3 className="research-title group-hover:text-gold transition-colors duration-500">
                           <HighlightText text={repo.name.replace(/-/g, '_')} highlight={search} />
                         </h3>
-                        <p className="text-base text-stone-500 italic">
+                        <p className="research-abstract italic">
                           "<HighlightText text={repo.description || 'A systematic archival of engineering logic and experimental implementation.'} highlight={search} />"
                         </p>
                       </div>
 
-                      <div className="border-t border-white/5 pt-10 grid gap-10">
+                      <div className="border-t border-white/5 pt-10 space-y-10">
                         <div className="space-y-4">
                           <p className="text-[10px] font-bold uppercase tracking-widest text-[#C7B27A]">Strategic Rationale</p>
                           <p className="text-lg text-stone-300 leading-relaxed font-display italic">
@@ -258,31 +322,46 @@ const Experiments = () => {
                           </p>
                         </div>
 
-                        <div className="space-y-4">
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-[#C7B27A]">Operational Capabilities</p>
-                          <ul className="grid gap-4">
-                            {aug.capabilities.map((cap, idx) => (
-                              <li key={idx} className="text-sm text-stone-400 flex items-center gap-4">
-                                <span className="w-2 h-[1px] bg-gold/30" />
-                                <HighlightText text={cap} highlight={search} />
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
                         <div className="space-y-6">
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-[#C7B27A]">Technical Foundation</p>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                             <span className="w-[1px] h-3 bg-stone-600/60" /> STACK
+                          </p>
                           <div className="flex flex-wrap gap-2">
                             {aug.offerings.map((tech, idx) => (
-                              <span key={idx} className={`tech-pill ${tagTone(tech)} font-mono text-[10px] uppercase tracking-wider`}>
+                              <span key={idx} className={`tech-pill ${tagTone(tech)}`}>
                                 <HighlightText text={tech} highlight={search} />
                               </span>
                             ))}
                           </div>
-                          <p className="text-xs font-mono text-stone-500 mt-2">
-                            <HighlightText text={aug.architecture} highlight={search} />
-                          </p>
                         </div>
+
+                        <div className="space-y-6">
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                             <span className="w-[1px] h-3 bg-stone-600/60" /> CORE
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {aug.capabilities.map((cap, idx) => (
+                              <span key={idx} className={`tech-pill ${tagTone(cap)}`}>
+                                <HighlightText text={cap} highlight={search} />
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {aug.lead && aug.lead.length > 0 && (
+                          <div className="space-y-6">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
+                               <span className="w-[1px] h-3 bg-stone-600/60" /> LEAD
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {aug.lead.map((item, idx) => (
+                                <span key={idx} className={`tech-pill ${tagTone(item)}`}>
+                                  <HighlightText text={item} highlight={search} />
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
 
                       <a 
@@ -301,10 +380,12 @@ const Experiments = () => {
                       </a>
                     </div>
 
-                    <div className="mt-10 pt-10 border-t border-white/[0.04] w-full flex items-center justify-between opacity-60 z-10 relative">
+                    <div className="mt-10 pt-10 border-t border-white/[0.04] w-full flex items-center justify-between opacity-60 z-20 relative">
                         <span className="text-[10px] font-mono text-stone-600 tracking-widest uppercase">Sync: {new Date(repo.updated_at).toLocaleDateString()}</span>
                         <span className="text-[10px] font-mono text-emerald-500/80 font-bold uppercase tracking-widest">System OK</span>
                     </div>
+
+                    <div className="research-card-line" style={{ background: styles.color, opacity: 0.3 }} />
                   </motion.article>
                 );
               })
