@@ -125,13 +125,8 @@ const Experiments = () => {
   };
 
   const getLanguageStyles = (lang) => {
-    const l = lang?.toLowerCase() || '';
-    // Consistent Golden Dossier Accents
-    if (l.includes('python') || l.includes('jupyter')) return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
-    if (l.includes('javascript') || l.includes('react') || l.includes('typescript')) return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
-    if (l.includes('html') || l.includes('css')) return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
-    if (l.includes('c++')) return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
-    return { text: 'text-white/40', border: 'border-white/10', glow: 'from-stone-500/10', color: '#C7B27A' };
+    // Consistent Golden Dossier Accents - Force text-gold globally
+    return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
   };
 
   useEffect(() => {

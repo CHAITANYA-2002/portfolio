@@ -210,17 +210,26 @@ const JourneyTheater = ({ activeIndex, setActiveIndex }) => {
         {/* S-curve — purely decorative, sits behind cards */}
         <svg
           className="s-timeline-path"
-          viewBox="0 0 400 100"
+          viewBox="0 0 100 100"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
+          {/* Base path - subtle trail */}
+          <path
+            d="M50 0 C20 15 80 35 50 50 S20 85 50 100"
+            className="opacity-10"
+          />
+          {/* Animated drawing path - Glowing Golden Line */}
           <motion.path
-            d="M200 2 C40 15 40 38 200 52 S360 78 200 92 S40 108 200 98"
+            d="M50 0 C20 15 80 35 50 50 S20 85 50 100"
             pathLength="1"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              filter: 'drop-shadow(0 0 8px rgba(199, 178, 122, 0.6))'
+            }}
           />
         </svg>
 

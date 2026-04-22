@@ -283,7 +283,7 @@
     border-radius: 999px;
     border: 1px solid var(--pill-border);
     background: var(--pill-bg);
-    color: var(--pill-text);
+    color: var(--color-gold); /* User Request: Always golden text */
     padding: 7px 12px;
     font-size: 11px;
     font-weight: 700;
@@ -293,10 +293,10 @@
 
   .tech-pill:hover {
     transform: translateY(-2px);
-    border-color: var(--pill-text);
-    background: var(--pill-text);
-    color: #000;
-    box-shadow: 0 4px 12px var(--pill-border);
+    border-color: var(--color-gold);
+    background: rgba(199, 178, 122, 0.15);
+    color: var(--color-gold);
+    box-shadow: 0 4px 12px rgba(199, 178, 122, 0.25);
   }
 
   .tone-microsoft {
@@ -609,48 +609,41 @@
   }
 
   /* Mobile: single column with left accent line */
+  /* Mobile: centered cards to allow the S-curve to weave */
   .s-timeline {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 8px 0 8px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 32px 0;
   }
 
   /* The decorative SVG S-path — hidden on mobile */
   .s-timeline-path {
-    display: none;
+    display: block; /* Always visible for weaving effect */
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 0;
+    opacity: 0.25;
+    filter: drop-shadow(0 0 12px rgba(199, 178, 122, 0.4));
+    transition: opacity 0.8s ease;
   }
 
   .s-timeline-path path {
     fill: none;
-    stroke: rgba(199, 178, 122, 0.22);
-    stroke-width: 2;
+    stroke: var(--color-gold);
+    stroke-width: 2.5;
     stroke-linecap: round;
-    stroke-dasharray: 8 16;
+    stroke-dasharray: 6 12;
   }
 
-  /* Mobile accent line */
+  /* Responsive Mobile Line - Hidden in favor of S-Curve */
   .s-line-mobile {
-    position: absolute;
-    left: 14px;
-    top: 8px;
-    bottom: 8px;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.08);
-    pointer-events: none;
-  }
-
-  @media (min-width: 900px) {
-    .s-line-mobile {
-      display: none;
-    }
+    display: none;
   }
 
   .s-line-mobile-progress {
@@ -761,8 +754,31 @@
   }
 
   @media (max-width: 899px) {
+    .s-timeline {
+      padding: 32px 16px;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .s-card {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .s-card.is-left {
+      align-self: flex-start;
+      margin-left: 0;
+      border-top-left-radius: 4px;
+    }
+
+    .s-card.is-right {
+      align-self: flex-end;
+      margin-right: 0;
+      border-top-right-radius: 4px;
+    }
+
     .s-timeline-path {
-      display: none;
+       opacity: 0.15; /* Subtler for mobile overlays */
     }
   }
 
