@@ -80,26 +80,29 @@ const skillNotes = {
 };
 
 const ProjectCard = ({ project, index, active, onSelect }) => (
-  <motion.button
-    type="button"
-    onClick={onSelect}
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: '-60px' }}
-    transition={{ duration: 0.55, delay: index * 0.035 }}
-    whileHover={{ y: -8, scale: 1.018, rotateX: 2 }}
-    whileTap={{ scale: 0.985 }}
-    className={`project-card text-left ${active ? 'is-active' : ''}`}
-    aria-pressed={active}
-    layout
-  >
-    <div className="premium-card-glow" aria-hidden="true" />
-    <motion.span
-      className="project-card-sheen"
-      initial={{ x: '-130%', opacity: 0 }}
-      whileHover={{ x: '130%', opacity: 1 }}
-      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-    />
+    <motion.button
+      type="button"
+      onClick={onSelect}
+      initial="rest"
+      whileInView="active"
+      whileHover="active"
+      viewport={{ once: false, amount: 0.5 }}
+      transition={{ duration: 0.55, delay: index * 0.035 }}
+      whileTap={{ scale: 0.985 }}
+      className={`project-card text-left ${active ? 'is-active' : ''}`}
+      aria-pressed={active}
+      layout
+    >
+      <div className="premium-card-glow" aria-hidden="true" />
+      <motion.span
+        className="project-card-sheen"
+        initial={{ x: '-130%', opacity: 0 }}
+        variants={{
+          rest: { x: '-130%', opacity: 0 },
+          active: { x: '130%', opacity: 1 }
+        }}
+        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      />
     <div className="flex items-start justify-between gap-6">
       <span className="section-kicker">{project.hardSkills[0]}</span>
       <span className="project-index">{String(index + 1).padStart(2, '0')}</span>
@@ -450,16 +453,22 @@ const ResearchShowcase = () => {
           href={item.href}
           target="_blank"
           rel="noreferrer noopener"
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          initial="rest"
+          whileInView="active"
+          whileHover="active"
+          viewport={{ once: false, amount: 0.6 }}
           transition={{ duration: 0.65, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-          whileHover="hover"
           className="research-card"
           aria-label={`Open ${item.title}`}
         >
           {/* Glow orb */}
-          <div className="premium-card-glow" aria-hidden="true" />
+          <motion.div 
+            className="premium-card-glow" 
+            variants={{
+              rest: { opacity: 0 },
+              active: { opacity: 1 }
+            }}
+          />
 
           {/* Top bar */}
           <div className="research-card-topbar">
@@ -561,7 +570,7 @@ const ResearchShowcase = () => {
           <div className="research-cta">
             <span>View {item.label}</span>
             <motion.span
-              variants={{ hover: { x: 5 } }}
+              variants={{ active: { x: 5 } }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
               className="research-arrow"
             >
@@ -572,8 +581,10 @@ const ResearchShowcase = () => {
           {/* Animated accent line on hover */}
           <motion.div
             className="research-card-line bg-[#C7B27A]"
-            variants={{ hover: { scaleX: 1 } }}
-            initial={{ scaleX: 0 }}
+            variants={{ 
+              rest: { scaleX: 0, opacity: 0.2 },
+              active: { scaleX: 1, opacity: 1 } 
+            }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           />
         </motion.a>
@@ -603,6 +614,10 @@ const CredentialsShowcase = () => {
           key={edu.degree}
           onMouseMove={(e) => handleMouseMove(e, edu.degree)}
           className="research-card cursor-default border-white/10 relative overflow-hidden group transition-all duration-500 hover:border-[#C7B27A]/40"
+          initial="rest"
+          whileInView="active"
+          whileHover="active"
+          viewport={{ once: false, amount: 0.4 }}
           style={{ 
             background: 'rgba(255, 255, 255, 0.08)',
             padding: '56px',
@@ -612,9 +627,25 @@ const CredentialsShowcase = () => {
           }}
         >
           {/* Atmospheric Background Lighting */}
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-40" />
+          <motion.div 
+            variants={{
+              rest: { opacity: 0.2 },
+              active: { opacity: 0.6 }
+            }}
+            className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent" 
+          />
           
           {/* Swiping Light Interaction */}
+          <motion.div 
+            className="absolute top-0 left-0 w-full h-full pointer-events-none"
+            variants={{
+              active: { x: ['-100%', '100%'] }
+            }}
+            transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity, repeatDelay: 3 }}
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent)'
+            }}
+          />
           <motion.div 
             className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{
@@ -704,8 +735,12 @@ const CredentialsShowcase = () => {
           const theme = brandThemes[cert.vendor] || { color: '#C7B27A', pill: 'tone-gold', glow: 'rgba(199, 178, 122, 0.1)' };
 
           return (
-            <div
+            <motion.div
               key={cert.title}
+              initial="rest"
+              whileInView="active"
+              whileHover="active"
+              viewport={{ once: false, amount: 0.6 }}
               onMouseMove={(e) => handleMouseMove(e, cert.title)}
               className="research-card flex flex-col cursor-default group transition-all duration-500 hover:border-[#C7B27A]/40"
               style={{ 
@@ -715,33 +750,64 @@ const CredentialsShowcase = () => {
                 WebkitBackdropFilter: 'blur(20px)'
               }}
             >
-              {/* Swiping Brand Light */}
+              {/* Swiping Brand Light / Cinematic Mobile Glow */}
               <motion.div 
                 className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background: mousePosition.id === cert.title ? `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, ${theme.glow}, transparent 60%)` : ''
+                variants={{
+                  rest: { opacity: 0 },
+                  active: { opacity: 1 }
                 }}
-              />
+                style={{
+                  background: mousePosition.id === cert.title 
+                    ? `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, ${theme.glow}, transparent 60%)` 
+                    : `radial-gradient(400px circle at 50% 50%, ${theme.glow}, transparent 70%)`
+                }}
+              >
+                {/* Mobile-only scanning light effect */}
+                <motion.div 
+                  className="sm:hidden absolute inset-0 opacity-20"
+                  animate={{
+                    background: [
+                      `radial-gradient(300px circle at 0% 50%, ${theme.glow}, transparent 60%)`,
+                      `radial-gradient(300px circle at 100% 50%, ${theme.glow}, transparent 60%)`,
+                      `radial-gradient(300px circle at 0% 50%, ${theme.glow}, transparent 60%)`,
+                    ]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                />
+              </motion.div>
               
               <div className="research-card-topbar items-start relative z-10">
                 <div className="flex flex-col gap-2">
-                  <span className={`tech-pill transition-all duration-500 w-fit border-white/5 ${theme.pill} opacity-60 group-hover:opacity-100`}>
+                  <motion.span 
+                    variants={{
+                      rest: { opacity: 0.6 },
+                      active: { opacity: 1 }
+                    }}
+                    className={`tech-pill transition-all duration-500 w-fit border-white/5 ${theme.pill}`}
+                  >
                     {cert.issuer}
-                  </span>
+                  </motion.span>
                   <span className="research-year opacity-50">{cert.year}</span>
                 </div>
                 {cert.logo && (
                   <div className="relative w-10 h-10">
-                    <img 
+                    <motion.img 
                       src={cert.logo} 
                       alt={`${cert.issuer} Logo`} 
-                      className="w-full h-full object-contain invert grayscale brightness-200 transition-all duration-500 group-hover:grayscale-0 group-hover:brightness-100"
-                      style={{ 
-                        filter: 'sepia(1) saturate(5) hue-rotate(5deg) brightness(0.8)' 
+                      variants={{
+                        rest: { filter: 'grayscale(1) brightness(0.8) sepia(1) saturate(5) hue-rotate(5deg)' },
+                        active: { filter: 'grayscale(0) brightness(1) sepia(0) saturate(1) hue-rotate(0deg)' }
                       }}
+                      className="w-full h-full object-contain transition-all duration-500"
                     />
-                    <div 
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full blur-[4px]"
+                    <motion.div 
+                      className="absolute inset-0 rounded-full blur-[4px]"
+                      variants={{
+                        rest: { opacity: 0 },
+                        active: { opacity: 0.6 }
+                      }}
+                      transition={{ duration: 0.5 }}
                       style={{ background: theme.color, mixBlendMode: 'color' }}
                     />
                   </div>
@@ -775,9 +841,16 @@ const CredentialsShowcase = () => {
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {cert.competencies.map((comp) => (
-                        <span key={comp} className={`tech-pill text-[10px] ${tagTone(comp)} group-hover:brightness-110`}>
+                        <motion.span 
+                          key={comp} 
+                          variants={{
+                            rest: { brightness: 1 },
+                            active: { brightness: 1.2 }
+                          }}
+                          className={`tech-pill text-[10px] ${tagTone(comp)} transition-all`}
+                        >
                           {comp}
-                        </span>
+                        </motion.span>
                       ))}
                     </div>
                   </div>
@@ -785,10 +858,15 @@ const CredentialsShowcase = () => {
               </div>
 
               <motion.div
-                className="research-card-line bg-[#C7B27A] group-hover:bg-opacity-100 group-hover:opacity-100 transition-all duration-500"
-                style={{ scaleX: 1, opacity: 0.2, height: '1px' }}
+                variants={{
+                  rest: { scaleX: 0.8, opacity: 0.2 },
+                  active: { scaleX: 1, opacity: 1 }
+                }}
+                transition={{ duration: 0.6 }}
+                className="research-card-line bg-[#C7B27A]"
+                style={{ height: '1px' }}
               />
-            </div>
+            </motion.div>
           );
         })}
       </div>
