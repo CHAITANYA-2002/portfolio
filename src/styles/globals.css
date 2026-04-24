@@ -712,6 +712,7 @@
     }
 
     .s-timeline {
+      display: grid;
       grid-template-columns: 1fr 1fr;
       /* column gap = where the S-curve spine runs */
       column-gap: 100px;
