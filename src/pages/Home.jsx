@@ -137,13 +137,11 @@ const ProjectWorkbench = ({ activeProjectIndex, setActiveProjectIndex }) => {
               transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
               className="project-detail-panel"
             >
-              <div className="project-detail-topline">
-                <span className="project-detail-index">{String(activeProjectIndex + 1).padStart(2, '0')}</span>
-                <span className="project-detail-outcome">{activeProject.outcome}</span>
-              </div>
-
               <div className="project-detail-intro">
-                <p className="project-meta-label">Selected system</p>
+                <div className="project-detail-topline">
+                  <p className="project-meta-label">Impact</p>
+                  <span className="project-detail-outcome">{activeProject.outcome}</span>
+                </div>
                 <h4>{activeProject.title}</h4>
                 <p className="project-detail-summary">{activeProject.problem}</p>
               </div>
@@ -158,40 +156,32 @@ const ProjectWorkbench = ({ activeProjectIndex, setActiveProjectIndex }) => {
                   <p className="project-copy">{activeProject.approach}</p>
                 </div>
                 <div className="project-detail-section">
-                  <p className="project-meta-label">Technical proof</p>
-                  <div className="project-proof-grid">
-                    {activeProject.hardSkills.map((skill) => (
-                      <div key={skill} className="project-proof-item">
-                        {skill}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="project-pill-groups">
-                <div className="project-pill-group">
                   <p className="project-meta-label">Stack</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {activeProject.techStack.map((item) => (
-                      <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className="project-pill-group">
-                  <p className="project-meta-label">Core</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {activeProject.hardSkills.map((item) => (
-                      <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className="project-pill-group">
-                  <p className="project-meta-label">Lead</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {activeProject.softSkills.map((item) => (
-                      <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
-                    ))}
+                  <div className="project-detail-stack">
+                    <div className="project-stack-group">
+                      <span className="project-stack-label">Build</span>
+                      <div className="flex flex-wrap gap-2">
+                        {activeProject.techStack.map((item) => (
+                          <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="project-stack-group">
+                      <span className="project-stack-label">Core</span>
+                      <div className="flex flex-wrap gap-2">
+                        {activeProject.hardSkills.map((item) => (
+                          <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="project-stack-group">
+                      <span className="project-stack-label">Lead</span>
+                      <div className="flex flex-wrap gap-2">
+                        {activeProject.softSkills.map((item) => (
+                          <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
