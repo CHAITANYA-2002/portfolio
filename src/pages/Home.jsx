@@ -79,111 +79,129 @@ const skillNotes = {
   "Cloud & System Architecture": "The high-level foundation—focused on microservices scalability, RESTful API design, and robust infrastructure-as-code.",
 };
 
-const ProjectCard = ({ project, index, active, onSelect }) => (
-    <motion.button
-      type="button"
-      onClick={onSelect}
-      initial="rest"
-      whileInView="active"
-      whileHover="active"
-      viewport={{ once: false, amount: 0.5 }}
-      transition={{ duration: 0.55, delay: index * 0.035 }}
-      whileTap={{ scale: 0.985 }}
-      className={`project-card text-left ${active ? 'is-active' : ''}`}
-      aria-pressed={active}
-      layout
-    >
-      <div className="premium-card-glow" aria-hidden="true" />
-      <motion.span
-        className="project-card-sheen"
-        initial={{ x: '-130%', opacity: 0 }}
-        variants={{
-          rest: { x: '-130%', opacity: 0 },
-          active: { x: '130%', opacity: 1 }
-        }}
-        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      />
-    <div className="flex items-start justify-between gap-6">
-      <span className="section-kicker">{project.hardSkills[0]}</span>
-      <span className="project-index">{String(index + 1).padStart(2, '0')}</span>
-    </div>
-    <div className="mt-10 project-card-main">
-      <p className="text-sm text-stone-400 mb-3">{project.outcome}</p>
-      <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-normal leading-tight">
-        {project.title}
-      </h3>
-      <p className="mt-5 text-sm text-stone-400 leading-relaxed max-w-xl">{project.impact}</p>
-    </div>
-    <AnimatePresence initial={false}>
-      {active && (
-        <motion.div
-          initial={{ opacity: 0, height: 0, y: -8 }}
-          animate={{ opacity: 1, height: 'auto', y: 0 }}
-          exit={{ opacity: 0, height: 0, y: -8 }}
-          transition={{ duration: 0.3 }}
-          className="project-expanded"
+const ProjectWorkbench = ({ activeProjectIndex, setActiveProjectIndex }) => {
+  const activeProject = portfolioData.projects[activeProjectIndex];
+
+  return (
+    <div className="project-workbench">
+      <div className="project-workbench-header">
+        <div>
+          <p className="section-kicker mb-5">Project matrix</p>
+          <h3 className="project-workbench-title">
+            Built like a decision room, not a case-study gallery.
+          </h3>
+        </div>
+        <p className="project-workbench-copy">
+          Browse the systems on the left, then read the active build on the right in a cleaner operational view.
+        </p>
+      </div>
+
+      <div className="project-workbench-grid">
+        <div className="project-tab-rail" role="tablist" aria-label="Project selector">
+          {portfolioData.projects.map((project, index) => {
+            const isActive = activeProjectIndex === index;
+            return (
+              <button
+                key={project.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={`project-panel-${project.id}`}
+                id={`project-tab-${project.id}`}
+                onClick={() => setActiveProjectIndex(index)}
+                className={`project-tab ${isActive ? 'is-active' : ''}`}
+              >
+                <span className="project-tab-index">{String(index + 1).padStart(2, '0')}</span>
+                <span className="project-tab-copy">
+                  <strong>{project.title}</strong>
+                  <small>{project.outcome}</small>
+                </span>
+                <span className="project-tab-domain">{project.hardSkills[0]}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div
+          className="project-detail-shell"
+          role="tabpanel"
+          id={`project-panel-${activeProject.id}`}
+          aria-labelledby={`project-tab-${activeProject.id}`}
         >
-          <div className="grid gap-3 mb-8">
-            <p><span>Problem</span>{project.problem}</p>
-            <p><span>Approach</span>{project.approach}</p>
-            <p><span>Outcome</span>{project.outcome}</p>
-          </div>
-
-          {/* Categorized Skills (Mirroring Experience section) */}
-          <div className="space-y-5 pt-5 border-t border-white/5">
-            {/* Tech Stack */}
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              key={activeProject.id}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              className="project-detail-panel"
             >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
-                <span className="w-[1px] h-3 bg-stone-600/60" /> STACK
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.techStack.map((item) => (
-                  <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
-                ))}
+              <div className="project-detail-topline">
+                <span className="project-detail-index">{String(activeProjectIndex + 1).padStart(2, '0')}</span>
+                <span className="project-detail-outcome">{activeProject.outcome}</span>
+              </div>
+
+              <div className="project-detail-intro">
+                <p className="project-meta-label">Selected system</p>
+                <h4>{activeProject.title}</h4>
+                <p className="project-detail-summary">{activeProject.problem}</p>
+              </div>
+
+              <div className="project-detail-body">
+                <div className="project-detail-section">
+                  <p className="project-meta-label">What it is</p>
+                  <p className="project-copy">{activeProject.impact}</p>
+                </div>
+                <div className="project-detail-section">
+                  <p className="project-meta-label">Approach</p>
+                  <p className="project-copy">{activeProject.approach}</p>
+                </div>
+                <div className="project-detail-section">
+                  <p className="project-meta-label">Technical proof</p>
+                  <div className="project-proof-grid">
+                    {activeProject.hardSkills.map((skill) => (
+                      <div key={skill} className="project-proof-item">
+                        {skill}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="project-pill-groups">
+                <div className="project-pill-group">
+                  <p className="project-meta-label">Stack</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {activeProject.techStack.map((item) => (
+                      <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="project-pill-group">
+                  <p className="project-meta-label">Core</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {activeProject.hardSkills.map((item) => (
+                      <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="project-pill-group">
+                  <p className="project-meta-label">Lead</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {activeProject.softSkills.map((item) => (
+                      <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
-
-            {/* Hard Skills */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
-                <span className="w-[1px] h-3 bg-stone-600/60" /> CORE
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.hardSkills.map((item) => (
-                  <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Soft Skills */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-3 flex items-center gap-2">
-                <span className="w-[1px] h-3 bg-stone-600/60" /> LEAD
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.softSkills.map((item) => (
-                  <span key={item} className={`tech-pill ${tagTone(item)}`}>{item}</span>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </motion.button>
-);
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const JourneyTheater = ({ activeIndex, setActiveIndex }) => {
   const progress = portfolioData.experience.length > 1
@@ -889,6 +907,7 @@ const Home = () => {
   const [activeJourneyIndex, setActiveJourneyIndex] = useState(0);
   const [activeMetric, setActiveMetric] = useState(portfolioData.metrics[0].label);
   const [loadScene, setLoadScene] = useState(false);
+  const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
 
   useEffect(() => {
     const load = () => setLoadScene(true);
@@ -899,6 +918,15 @@ const Home = () => {
     const id = window.setTimeout(load, 700);
     return () => window.clearTimeout(id);
   }, []);
+
+  const handleEmailSubmit = (event) => {
+    event.preventDefault();
+    const subject = encodeURIComponent(`Portfolio inquiry from ${contactForm.name || 'Website visitor'}`);
+    const body = encodeURIComponent(
+      `Name: ${contactForm.name}\nEmail: ${contactForm.email}\n\nMessage:\n${contactForm.message}`
+    );
+    window.location.href = `mailto:${portfolioData.email}?subject=${subject}&body=${body}`;
+  };
 
   return (
     <div id="home" className="overflow-hidden">
@@ -981,17 +1009,10 @@ const Home = () => {
           title="A portfolio of useful systems, not template case studies."
           copy="The work spans fintech decisioning, edge AI, healthcare operations, business intelligence, and web experiences."
         />
-        <div className="project-grid">
-          {portfolioData.projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              active={activeProjectIndex === index}
-              onSelect={() => setActiveProjectIndex(index)}
-            />
-          ))}
-        </div>
+        <ProjectWorkbench
+          activeProjectIndex={activeProjectIndex}
+          setActiveProjectIndex={setActiveProjectIndex}
+        />
       </section>
 
       <section id="journey" className="section-shell">
@@ -1044,6 +1065,34 @@ const Home = () => {
             <p className="mt-6 max-w-xl text-stone-400 leading-relaxed">
               Open to strategic PM engagements, AI product partnerships, and consulting across product, data, and automation.
             </p>
+            <form onSubmit={handleEmailSubmit} className="mt-10 grid gap-4">
+              <input
+                type="text"
+                value={contactForm.name}
+                onChange={(event) => setContactForm((current) => ({ ...current, name: event.target.value }))}
+                placeholder="Your name"
+                className="input-field"
+                required
+              />
+              <input
+                type="email"
+                value={contactForm.email}
+                onChange={(event) => setContactForm((current) => ({ ...current, email: event.target.value }))}
+                placeholder="Your email"
+                className="input-field"
+                required
+              />
+              <textarea
+                value={contactForm.message}
+                onChange={(event) => setContactForm((current) => ({ ...current, message: event.target.value }))}
+                placeholder="Tell me what you are building"
+                className="input-field min-h-[140px] resize-none"
+                required
+              />
+              <button type="submit" className="btn-primary w-fit">
+                Send Message
+              </button>
+            </form>
           </div>
           <div className="grid gap-3">
             <a href={`mailto:${portfolioData.email}`} className="contact-link">{portfolioData.email}</a>

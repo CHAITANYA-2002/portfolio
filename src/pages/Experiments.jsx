@@ -62,69 +62,69 @@ const HighlightText = ({ text, highlight }) => {
   );
 };
 
+const repoAugmentations = {
+  'portfolio': {
+    architecture: 'React // SPA // Framer Motion // Tailwind',
+    rationale: 'The portfolio was architected to solve the paradox of complex professional identity—how to maintain high technical density while delivering a clean, luxury product narrative. It serves as a live demonstration of frontend orchestration.',
+    capabilities: ['Dynamic Multi-page Routing', 'Premium CSS Orchestration', 'Real-time GitHub API Sync'],
+    offerings: ['React', 'Framer Motion', 'Tailwind CSS', 'Vite']
+  },
+  'flask': {
+    architecture: 'Python // REST // WSGI',
+    rationale: 'This repository exists to deconstruct the friction between rapid backend development and architectural scalability. It explores how modular patterns can simplify the delivery of robust microservices.',
+    capabilities: ['Scalable Endpoint Design', 'Middleware Logic', 'Stateless Architecture'],
+    offerings: ['Python', 'Flask', 'SQLAlchemy', 'REST API']
+  },
+  'chatbot': {
+    architecture: 'RAG // LLM // LangChain // Vector DB',
+    rationale: 'Created to push the boundaries of LLM grounding. This experiment focuses on minimizing hallucination by bridging unstructured data with structured retrieval pipelines using modern RAG architectures.',
+    capabilities: ['Semantic Data Retrieval', 'Context-aware Prompting', 'Vector Database Integration'],
+    offerings: ['LangChain', 'Python', 'OpenAI', 'Pinecone']
+  },
+  'nlp': {
+    architecture: 'BERT // Python // Transformer // NLP',
+    rationale: 'A deep dive into advanced Natural Language Processing pipelines, focusing on BERT architectures, subword tokenization, and semantic alignment for high-fidelity sequence labeling.',
+    capabilities: ['Bert Feature Extraction', 'Subword Alignment', 'Deep Learning Pipeline'],
+    offerings: ['Python', 'BERT', 'PyTorch', 'HuggingFace', 'NLP']
+  },
+  'mern': {
+    architecture: 'MongoDB // Express // React // Node',
+    rationale: 'Orchestrating complex full-stack architectures using the MERN stack. This repository explores scalable service design, state synchronization, and robust API contracts.',
+    capabilities: ['Full-stack Integration', 'RESTful Middleware', 'State Orchestration'],
+    offerings: ['MongoDB', 'Express', 'React', 'Node.js']
+  },
+  'city-trail': {
+    architecture: 'TypeScript // Leaflet // GeoJSON',
+    rationale: 'An exploration of geographic data systems and pathfinding algorithms, delivering performant spatial visualizations and interactive trail mapping logic.',
+    capabilities: ['Spatial Data Rendering', 'Pathfinding Algorithms', 'Interactive Geospatial UI'],
+    offerings: ['TypeScript', 'Leaflet', 'GeoJSON', 'React']
+  },
+  'machine-learning': {
+    architecture: 'Scikit-Learn // Pandas // Matplotlib',
+    rationale: 'A comprehensive laboratory of core ML algorithms, from statistical regression to deep neural ensembles, focused on theoretical validation and model performance benchmarking.',
+    capabilities: ['Algorithmic Prototyping', 'Performance Analytics', 'Statistical Modeling'],
+    offerings: ['Jupyter', 'Scikit-Learn', 'Pandas', 'MLOps']
+  },
+  'bad_data': {
+    architecture: 'EDA // Pandas // Seaborn',
+    rationale: 'Engineering robustness for messy datasets. This experiment focuses on outlier detection, data imputation, and high-integrity EDA pipelines to ensure model reliability.',
+    capabilities: ['Anomaly Detection', 'Data Cleaning Pipeline', 'Exploratory Visualization'],
+    offerings: ['Python', 'EDA', 'Data Science', 'Statistics']
+  },
+  'leetcode-problems': {
+    architecture: 'C++ // DSA // Optimization',
+    rationale: 'Performance-first algorithmic implementations and data structure optimizations, focused on time-complexity minimization and clean engineering patterns.',
+    capabilities: ['Algorithm Optimization', 'Data Structure Mastery', 'Competitive Engineering'],
+    offerings: ['C++', 'DSA', 'Problem Solving', 'Algorithms']
+  }
+};
+
 const Experiments = () => {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
 
-  const repoAugmentations = {
-    'portfolio': {
-      architecture: 'React // SPA // Framer Motion // Tailwind',
-      rationale: 'The portfolio was architected to solve the paradox of complex professional identity—how to maintain high technical density while delivering a clean, luxury product narrative. It serves as a live demonstration of frontend orchestration.',
-      capabilities: ['Dynamic Multi-page Routing', 'Premium CSS Orchestration', 'Real-time GitHub API Sync'],
-      offerings: ['React', 'Framer Motion', 'Tailwind CSS', 'Vite']
-    },
-    'flask': {
-      architecture: 'Python // REST // WSGI',
-      rationale: 'This repository exists to deconstruct the friction between rapid backend development and architectural scalability. It explores how modular patterns can simplify the delivery of robust microservices.',
-      capabilities: ['Scalable Endpoint Design', 'Middleware Logic', 'Stateless Architecture'],
-      offerings: ['Python', 'Flask', 'SQLAlchemy', 'REST API']
-    },
-    'chatbot': {
-      architecture: 'RAG // LLM // LangChain // Vector DB',
-      rationale: 'Created to push the boundaries of LLM grounding. This experiment focuses on minimizing hallucination by bridging unstructured data with structured retrieval pipelines using modern RAG architectures.',
-      capabilities: ['Semantic Data Retrieval', 'Context-aware Prompting', 'Vector Database Integration'],
-      offerings: ['LangChain', 'Python', 'OpenAI', 'Pinecone']
-    },
-    'nlp': {
-      architecture: 'BERT // Python // Transformer // NLP',
-      rationale: 'A deep dive into advanced Natural Language Processing pipelines, focusing on BERT architectures, subword tokenization, and semantic alignment for high-fidelity sequence labeling.',
-      capabilities: ['Bert Feature Extraction', 'Subword Alignment', 'Deep Learning Pipeline'],
-      offerings: ['Python', 'BERT', 'PyTorch', 'HuggingFace', 'NLP']
-    },
-    'mern': {
-      architecture: 'MongoDB // Express // React // Node',
-      rationale: 'Orchestrating complex full-stack architectures using the MERN stack. This repository explores scalable service design, state synchronization, and robust API contracts.',
-      capabilities: ['Full-stack Integration', 'RESTful Middleware', 'State Orchestration'],
-      offerings: ['MongoDB', 'Express', 'React', 'Node.js']
-    },
-    'city-trail': {
-      architecture: 'TypeScript // Leaflet // GeoJSON',
-      rationale: 'An exploration of geographic data systems and pathfinding algorithms, delivering performant spatial visualizations and interactive trail mapping logic.',
-      capabilities: ['Spatial Data Rendering', 'Pathfinding Algorithms', 'Interactive Geospatial UI'],
-      offerings: ['TypeScript', 'Leaflet', 'GeoJSON', 'React']
-    },
-    'machine-learning': {
-      architecture: 'Scikit-Learn // Pandas // Matplotlib',
-      rationale: 'A comprehensive laboratory of core ML algorithms, from statistical regression to deep neural ensembles, focused on theoretical validation and model performance benchmarking.',
-      capabilities: ['Algorithmic Prototyping', 'Performance Analytics', 'Statistical Modeling'],
-      offerings: ['Jupyter', 'Scikit-Learn', 'Pandas', 'MLOps']
-    },
-    'bad_data': {
-      architecture: 'EDA // Pandas // Seaborn',
-      rationale: 'Engineering robustness for messy datasets. This experiment focuses on outlier detection, data imputation, and high-integrity EDA pipelines to ensure model reliability.',
-      capabilities: ['Anomaly Detection', 'Data Cleaning Pipeline', 'Exploratory Visualization'],
-      offerings: ['Python', 'EDA', 'Data Science', 'Statistics']
-    },
-    'leetcode-problems': {
-      architecture: 'C++ // DSA // Optimization',
-      rationale: 'Performance-first algorithmic implementations and data structure optimizations, focused on time-complexity minimization and clean engineering patterns.',
-      capabilities: ['Algorithm Optimization', 'Data Structure Mastery', 'Competitive Engineering'],
-      offerings: ['C++', 'DSA', 'Problem Solving', 'Algorithms']
-    }
-  };
-
-  const getLanguageStyles = (lang) => {
+  const getLanguageStyles = () => {
     // Consistent Golden Dossier Accents - Force text-gold globally
     return { text: 'text-gold', border: 'border-gold/20', glow: 'from-gold/10', color: '#C7B27A' };
   };
