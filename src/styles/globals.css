@@ -488,7 +488,7 @@
       linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02)),
       rgba(11, 11, 15, 0.72);
     backdrop-filter: blur(14px);
-    overflow: hidden;
+    overflow: hidden; /* clips any tab rail bleed on mobile */
   }
 
   .project-workbench-header {
@@ -517,10 +517,11 @@
 
   .project-tab-rail {
     display: flex;
+    flex-wrap: nowrap;
     gap: 12px;
     overflow-x: auto;
-    padding: 18px 18px 0;
-    border-bottom: 0;
+    padding: 18px 18px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     scrollbar-width: none;
   }
 
@@ -600,6 +601,38 @@
     color: rgba(199, 178, 122, 0.76);
   }
 
+  /* ── Enriched tab: problem blurb ────────────────────────── */
+  .project-tab-blurb {
+    display: none; /* shown on desktop via media query below */
+    margin-top: 10px;
+    color: #71717A;
+    font-size: 11.5px;
+    line-height: 1.55;
+    font-weight: 400;
+  }
+
+  /* ── Enriched tab: inline skill chips ───────────────────── */
+  .project-tab-chips {
+    display: none;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .project-tab-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(199, 178, 122, 0.22);
+    background: rgba(199, 178, 122, 0.07);
+    color: rgba(199, 178, 122, 0.72);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
   .project-detail-shell {
     min-width: 0;
   }
@@ -654,6 +687,79 @@
     line-height: 1.7;
   }
 
+  /* ── Results metrics bar ────────────────────────────────── */
+  .project-results-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    border: 1px solid rgba(199, 178, 122, 0.14);
+  }
+
+  .project-result-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 18px;
+    background: rgba(11, 11, 15, 0.6);
+    text-align: center;
+  }
+
+  .project-result-stat:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .project-result-value {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    line-height: 1;
+    color: #C7B27A;
+    letter-spacing: -0.01em;
+  }
+
+  .project-result-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: #71717A;
+    line-height: 1.4;
+  }
+
+  /* ── Challenge block ────────────────────────────────────── */
+  .project-challenge-block {
+    padding: 20px 22px;
+    border-radius: 14px;
+    background: rgba(199, 178, 122, 0.05);
+    border: 1px solid rgba(199, 178, 122, 0.16);
+    border-left: 3px solid rgba(199, 178, 122, 0.6);
+  }
+
+  .project-challenge-kicker {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(199, 178, 122, 0.7);
+    margin-bottom: 10px;
+  }
+
+  .project-challenge-icon {
+    font-size: 11px;
+    color: #C7B27A;
+  }
+
+  .project-challenge-text {
+    color: #C8C4BE;
+    font-size: 14px;
+    line-height: 1.75;
+    font-style: italic;
+  }
+
   .project-detail-body {
     display: grid;
     gap: 28px;
@@ -695,27 +801,129 @@
     font-weight: 500;
   }
 
+  /* ── Key highlights block ───────────────────────────────── */
+  .project-highlights {
+    display: grid;
+    gap: 10px;
+  }
+
+  .project-highlight-line {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #D4D4D8;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .project-highlight-dot {
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: #C7B27A;
+    margin-top: 2px;
+    box-shadow: 0 0 6px rgba(199, 178, 122, 0.5);
+  }
+
   @media (max-width: 767px) {
     .project-workbench-header {
       gap: 20px;
       padding: 28px 20px 24px;
     }
 
+    /* Force single-column stack on mobile */
+    .project-workbench-grid {
+      grid-template-columns: 1fr;
+      overflow: hidden;
+    }
+
+    /* Tab rail: horizontal scroll, clipped so it doesn't bleed */
+    .project-tab-rail {
+      overflow-x: auto;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      padding: 16px 16px 16px;
+    }
+
     .project-tab {
-      min-width: 220px;
-      padding: 16px;
+      min-width: 200px;
+      max-width: 240px;
+      padding: 14px 14px;
+      flex-shrink: 0;
+    }
+
+    .project-tab-index {
+      font-size: 24px;
+    }
+
+    .project-tab-copy strong {
+      font-size: 13px;
+    }
+
+    /* Outcome badge: wrap text instead of overflow */
+    .project-detail-topline {
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .project-detail-outcome {
+      white-space: normal;
+      max-width: 100%;
+      padding: 4px 12px;
+      min-height: unset;
+      font-size: 11px;
+      line-height: 1.4;
     }
 
     .project-detail-panel {
-      padding: 28px 20px;
+      padding: 22px 18px;
     }
 
     .project-detail-intro h4 {
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
 
     .project-detail-intro {
-      padding-bottom: 28px;
+      padding-bottom: 20px;
+    }
+
+    /* Results row: compact on mobile */
+    .project-results-row {
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 4px;
+    }
+
+    .project-result-stat {
+      padding: 12px 8px;
+    }
+
+    .project-result-value {
+      font-size: 1.35rem;
+    }
+
+    .project-result-label {
+      font-size: 9px;
+    }
+
+    /* Challenge block tighter on mobile */
+    .project-challenge-block {
+      padding: 16px 16px;
+    }
+
+    .project-challenge-text {
+      font-size: 13px;
+    }
+
+    /* Highlight lines smaller text on mobile */
+    .project-highlight-line {
+      font-size: 12.5px;
+      padding: 9px 12px;
     }
   }
 
@@ -734,11 +942,17 @@
     .project-tab-rail {
       display: grid;
       align-content: start;
-      gap: 12px;
-      overflow: hidden;
+      gap: 10px;
+      overflow-y: auto;
+      overflow-x: hidden;
       padding: 24px 20px 24px 24px;
       border-right: 1px solid rgba(255, 255, 255, 0.06);
       border-bottom: 0;
+      scrollbar-width: none;
+    }
+
+    .project-tab-rail::-webkit-scrollbar {
+      display: none;
     }
 
     .project-tab {

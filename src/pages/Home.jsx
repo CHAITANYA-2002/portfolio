@@ -137,6 +137,7 @@ const ProjectWorkbench = ({ activeProjectIndex, setActiveProjectIndex }) => {
               transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
               className="project-detail-panel"
             >
+              {/* ── Intro ───────────────────────────────────────── */}
               <div className="project-detail-intro">
                 <div className="project-detail-topline">
                   <p className="project-meta-label">Impact</p>
@@ -146,7 +147,26 @@ const ProjectWorkbench = ({ activeProjectIndex, setActiveProjectIndex }) => {
                 <p className="project-detail-summary">{activeProject.problem}</p>
               </div>
 
+              {/* ── Results metrics row ─────────────────────────── */}
+              {activeProject.results && (
+                <div className="project-results-row">
+                  {activeProject.results.map((r, i) => (
+                    <motion.div
+                      key={r.label}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.05 + i * 0.06, duration: 0.3 }}
+                      className="project-result-stat"
+                    >
+                      <span className="project-result-value">{r.value}</span>
+                      <span className="project-result-label">{r.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
               <div className="project-detail-body">
+                {/* ── What it is + Approach ───────────────────── */}
                 <div className="project-detail-section">
                   <p className="project-meta-label">What it is</p>
                   <p className="project-copy">{activeProject.impact}</p>
@@ -155,6 +175,45 @@ const ProjectWorkbench = ({ activeProjectIndex, setActiveProjectIndex }) => {
                   <p className="project-meta-label">Approach</p>
                   <p className="project-copy">{activeProject.approach}</p>
                 </div>
+
+                {/* ── The Challenge ───────────────────────────── */}
+                {activeProject.challenge && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.18, duration: 0.4 }}
+                    className="project-challenge-block"
+                  >
+                    <p className="project-challenge-kicker">
+                      <span className="project-challenge-icon" aria-hidden="true">◈</span>
+                      The challenge
+                    </p>
+                    <p className="project-challenge-text">{activeProject.challenge}</p>
+                  </motion.div>
+                )}
+
+                {/* ── Key Highlights ──────────────────────────── */}
+                {activeProject.highlights && activeProject.highlights.length > 0 && (
+                  <div className="project-detail-section">
+                    <p className="project-meta-label">Key highlights</p>
+                    <div className="project-highlights">
+                      {activeProject.highlights.map((line, i) => (
+                        <motion.div
+                          key={line}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.12 + i * 0.08, duration: 0.35, ease: 'easeOut' }}
+                          className="project-highlight-line"
+                        >
+                          <span className="project-highlight-dot" aria-hidden="true" />
+                          <span>{line}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── Stack ───────────────────────────────────── */}
                 <div className="project-detail-section">
                   <p className="project-meta-label">Stack</p>
                   <div className="project-detail-stack">
