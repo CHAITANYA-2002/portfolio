@@ -1,89 +1,65 @@
-# <img src="file:///C:/Users/chait/.gemini/antigravity/brain/66a46301-c978-4446-b58b-311012664c04/portfolio_hero_banner_1777019788421.png" alt="Portfolio Hero Banner" width="100%" />
+# Chaitanya Portfolio
 
-# 🌟 Chaitanya's Obsidian & Gold Portfolio
+Personal portfolio website built with React, Vite, animated sections, custom styling, and project-focused storytelling. The site is designed to present experience, experiments, contact information, and selected technical work in a polished single-page experience with additional routed pages.
 
-> **Welcome!** Explore a premium, glass‑morphism‑infused showcase of my full‑stack projects, experience timeline, and technical expertise.
+## Highlights
 
----
+- React + Vite application with modern routing.
+- Animated hero and sections using Framer Motion.
+- Three.js-powered visual hero scene.
+- SEO component powered by `react-helmet-async`.
+- Responsive layout with custom CSS and Tailwind tooling.
+- Dedicated pages for home, experiments, and contact.
 
-## 🎯 About This Repo
+## Tech Stack
 
-This repository houses the source code for my personal portfolio website, built with a modern **React + Vite** stack and styled using a **custom dark‑mode glassmorphism design system**. The UI follows an **Obsidian & Gold** aesthetic – deep matte backgrounds, subtle translucency, and elegant golden accents throughout.
-
----
-
-## 🛠️ Tech Stack
-
-| Category | Technologies |
+| Area | Tools |
 |---|---|
-| **Framework** | React 18, Vite 5 |
-| **Styling** | Vanilla CSS with CSS‑variables, custom glass‑morphism utilities |
-| **Routing** | React Router v6 |
-| **Animations** | Framer Motion (spring‑based) |
-| **Icons** | React‑Icons, custom SVGs |
-| **Deployment** | Vercel (auto‑deploy on push) |
-| **Testing** | Jest + React Testing Library |
+| Frontend | React, Vite |
+| Routing | React Router |
+| Animation | Framer Motion |
+| 3D | Three.js |
+| Styling | CSS, Tailwind CSS tooling |
+| SEO | react-helmet-async |
+| Quality | ESLint |
 
----
+## Repository Structure
 
-## ✨ Key Features
+```text
+portfolio/
+|-- public/
+|-- src/
+|   |-- assets/
+|   |-- components/
+|   |-- data/
+|   |-- pages/
+|   |-- styles/
+|   |-- App.jsx
+|   |-- main.jsx
+|-- package.json
+|-- vite.config.js
+```
 
-- **Dynamic Experience Timeline** – a golden S‑curve that gracefully weaves between experience cards.
-- **Premium Dossier System** – credential cards with brand‑specific reveal colours on hover.
-- **Responsive Bento Grid** – modular project showcase that adapts to any screen size.
-- **Glass‑morphism UI** – translucent containers, subtle shadows, and smooth micro‑interactions.
-- **SEO‑Optimized** – semantic headings, meaningful meta tags, and fast load times.
-- **Dark/Light Theme Toggle** – instant switch with smooth transition.
-
----
-
-## 📦 Installation & Development
+## Local Development
 
 ```bash
-# Clone the repo
-git clone https://github.com/chaitanya/portfolio.git
+git clone https://github.com/CHAITANYA-2002/portfolio.git
 cd portfolio
-
-# Install dependencies
 npm install
-
-# Run locally
 npm run dev
 ```
 
-The site will be available at `http://localhost:5173`.
+Open the local Vite URL shown in the terminal, usually `http://localhost:5173`.
 
----
+## Available Scripts
 
-## 🚀 Deployment
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Start the local development server. |
+| `npm run build` | Create a production build. |
+| `npm run preview` | Preview the production build locally. |
+| `npm run lint` | Run ESLint checks. |
 
-The repository is connected to **Vercel**. Every push to the `main` branch triggers an automatic build and deployment. To deploy manually:
+## Portfolio Focus
 
-```bash
-# Build production bundle
-npm run build
-
-# Preview locally
-npm run preview
-```
-
----
-
-## 📚 Documentation
-
-- **Project Overview** – see `/src/pages` for page‑level components.
-- **Design System** – `/src/styles` contains the CSS variables and glass‑morphism utilities.
-- **Component Library** – reusable UI components live in `/src/components`.
-- **SEO** – meta tags are defined in `src/components/SEO.jsx`.
-
----
-
-## 📞 Contact & Links
-
-- **Website** – https://chaitanya-portfolio.vercel.app
-- **LinkedIn** – https://linkedin.com/in/chaitanya
-- **Email** – chaitanya@example.com
-
----
-
-<p align="right"><sub>✨ Crafted with love and a touch of gold ✨</sub></p>
+This site is intended to be the front door for my work: clear project summaries, technical credibility, responsive presentation, and direct contact paths.
