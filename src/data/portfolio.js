@@ -3,16 +3,137 @@ export const portfolioData = {
   role: "Technical Product Manager | AI & Data Orchestrator",
   email: "chaitanya100502@gmail.com",
   phone: "+91 7976989699",
-  location: "India / Global",
+  location: "Jaipur, India",
   
   metrics: [
-    { label: "AI Products Shipped", value: 3, suffix: "+" },
+    { label: "AI Products Shipped", value: 6, suffix: "+" },
     { label: "Reduction in Loan Defaults", value: 20, suffix: "%" },
     { label: "Pre-launch Bug Resolution", value: 95, suffix: "%" },
     { label: "Experience", value: 3, suffix: "y" },
   ],
 
   projects: [
+    {
+      id: "stripe-crm-dashboard",
+      title: "Stripe Analytics + CRM Dashboard",
+      outcome: "Team's Daily Source of Truth",
+      problem: "A SaaS team had no real-time view of revenue health — MRR, churn and trial conversion lived in spreadsheets updated by hand.",
+      impact: "Built a real-time subscription-analytics + CRM platform that became the team's daily source of truth, cutting reporting from hours to minutes.",
+      approach: "Modeled raw Stripe data into MRR/ARR/churn/LTV/trial-conversion metrics, layered a multi-pipeline CRM, and automated a customer-health signal engine.",
+      challenge: "Revenue truth is scattered across Stripe objects (subscriptions, invoices, charges, refunds) with currency pools and billing intervals that never reconcile cleanly. The system had to compute defensible MRR and churn while flagging at-risk accounts before a human noticed them.",
+      results: [
+        { value: "hrs → mins", label: "Reporting time collapsed" },
+        { value: "8 signals", label: "Auto customer-health flags" },
+        { value: "USD + INR", label: "Multi-currency revenue pools" }
+      ],
+      highlights: [
+        "Computed MRR, ARR, churn, LTV, ARPU and trial-conversion from raw Stripe entities with currency-pool and billing-interval normalization — the team's daily source of truth.",
+        "Built an automated customer-health system detecting 8 risk signals (failed payments, trial expiries, cancellations) and auto-creating prioritized sales cases.",
+        "Shipped a multi-pipeline CRM (signup, trial, win-back) with case journeys, activity timelines and AI next-step suggestions.",
+        "Delivered a React + Vite + Tailwind front end with light/dark theming, deployed as a self-contained demo that runs entirely on mock data.",
+        "Backed by a Node + MySQL service layer with type-safe queries and webhook-driven sync."
+      ],
+      techStack: ["React", "TypeScript", "Vite", "Node.js", "MySQL", "Stripe API", "Tailwind CSS"],
+      hardSkills: ["Revenue Analytics", "CRM Systems", "Data Modeling", "Dashboarding"],
+      softSkills: ["Product Strategy", "Stakeholder Reporting", "SaaS Domain Knowledge"],
+      liveUrl: "https://chaitanya-2002.github.io/client-work/helix/",
+      featured: true
+    },
+    {
+      id: "llm-email-agent",
+      title: "LLM Lifecycle Email Agent",
+      outcome: "Signup → Trial → Win-back",
+      problem: "Lifecycle emails were manual and inconsistent — and letting an LLM write them risked hallucinated offers or unreviewed sends.",
+      impact: "Shipped an AI email agent on the Anthropic Claude API that drafts lifecycle messages behind truth-only guardrails and one-click human approval.",
+      approach: "Designed stage-specific reusable prompt templates, a grounding/guardrail layer, and a human-in-the-loop review step before any send.",
+      challenge: "An autonomous email agent is one hallucinated promise away from a compliance incident. The hard part was letting the model write freely while a deterministic gate guaranteed every claim was grounded and a human approved each send.",
+      results: [
+        { value: "3 stages", label: "Signup, trial, win-back" },
+        { value: "Human-gated", label: "Review before every send" },
+        { value: "Claude API", label: "Anthropic-powered drafting" }
+      ],
+      highlights: [
+        "Built signup → trial → win-back flows on the Anthropic / Claude API with stage-specific, reusable prompt templates.",
+        "Added a grounding layer and hallucination guardrails so drafts only reference real account data, with one-click human review before send.",
+        "Packaged client-facing demos (a finance lifecycle agent and an outbound SDR agent) behind multi-check compliance and deliverability gates, deployed to GitHub Pages."
+      ],
+      techStack: ["Anthropic Claude API", "Python", "Node.js", "Prompt Engineering", "REST API"],
+      hardSkills: ["LLM Orchestration", "Prompt Engineering", "Guardrail Design", "Agent Design"],
+      softSkills: ["Lifecycle Marketing", "Compliance Awareness", "Human-in-the-loop Design"],
+      liveUrl: "https://chaitanya-2002.github.io/client-work/",
+      featured: true
+    },
+    {
+      id: "rag-knowledge-base",
+      title: "RAG Knowledge-Base & Semantic Search",
+      outcome: "+40% Search Accuracy",
+      problem: "Product LLM features returned generic, ungrounded answers and couldn't cite where the information came from.",
+      impact: "Architected a retrieval-augmented generation layer that grounds answers in source documents and lifted semantic search accuracy 40%.",
+      approach: "Designed document ingestion, chunking and vector embeddings, then a prompt-construction and grounding layer over the retriever.",
+      challenge: "Naive RAG retrieves plausible-but-wrong chunks and the LLM confidently runs with them. Source-grounded answers meant tuning chunking, embeddings and the grounding prompt so retrieval precision actually mapped to answer quality.",
+      results: [
+        { value: "+40%", label: "Semantic search accuracy" },
+        { value: "+25%", label: "User engagement" },
+        { value: "Source-cited", label: "Grounded answers" }
+      ],
+      highlights: [
+        "Built a document ingestion → chunking → vector embedding pipeline for semantic search over a product knowledge base.",
+        "Designed the prompt-construction and grounding layer that cut hallucinations and returned source-grounded answers across the product's LLM features.",
+        "Tuned retrieval (chunk size, top-k, similarity) against an eval set — lifting semantic search accuracy 40% and user engagement 25%."
+      ],
+      techStack: ["Python", "LangChain", "Embeddings", "Vector Search", "FAISS", "Anthropic Claude API"],
+      hardSkills: ["RAG Pipelines", "Semantic Search", "Embeddings", "LLM Evaluation"],
+      softSkills: ["Technical Discovery", "Quality Benchmarking", "Iterative Tuning"]
+    },
+    {
+      id: "aria-frontdesk",
+      title: "Aria — AI Front Desk (Booking Agent)",
+      outcome: "Books 24/7, Fills Cancellations",
+      problem: "Med spas and clinics spend heavily on ads but leak revenue at the front desk — slow replies lose leads, freed-up slots go unfilled, and no-shows pile up with no follow-up.",
+      impact: "Shipped a booking + lead-nurture AI agent that replies instantly 24/7, auto-fills cancellations from a waitlist, and revives dead leads — packaged as a sales-ready product demo with a live ROI calculator.",
+      approach: "Designed three sales surfaces — a problem-framing landing page, an interactive agent demo across three real scenarios, and an owner dashboard — all running on sample data with no API key required.",
+      challenge: "Selling automation to a non-technical clinic owner means the demo has to feel real without any backend or API keys. The challenge was building a believable offline agent engine that handles inbound booking, objection handling, outbound cancellation-fills, and win-back — convincingly, live on a sales call.",
+      results: [
+        { value: "24/7", label: "Instant multi-channel replies" },
+        { value: "3 flows", label: "Book · fill cancellation · revive lead" },
+        { value: "Live ROI", label: "On-call revenue calculator" }
+      ],
+      highlights: [
+        "Built an offline conversational agent that books appointments, answers questions and handles objections across three scripted-but-dynamic scenarios — inbound patient, cancellation fill, and dead-lead win-back — with zero API keys so it runs anywhere on a sales call.",
+        "Designed an owner dashboard surfacing the metrics a clinic actually buys on: revenue recovered, cancellations filled, no-shows prevented, leads revived, channel mix, and a revival funnel.",
+        "Shipped a conversion-focused landing page with a live ROI calculator that turns 'filled cancellations + fewer no-shows' into a concrete number for the prospect in real time.",
+        "Framed the whole experience around a real pricing model ($1.5–3k setup + $500–1k/mo) so the demo doubles as a closing tool, not just a tech showcase."
+      ],
+      techStack: ["Next.js 14", "TypeScript", "React", "Framer Motion", "Tailwind CSS"],
+      hardSkills: ["Agent Design", "Conversational AI", "Booking Automation", "Dashboarding"],
+      softSkills: ["Product Strategy", "Sales Enablement", "Vertical SaaS Positioning"],
+      featured: true
+    },
+    {
+      id: "hum-ai-interior",
+      title: "HUM.AI — AI Interior Design App",
+      outcome: "Photo → Redesign + Shoppable Products",
+      problem: "Redesigning a room is intimidating — people can't visualize the options and don't know what to buy or whether it fits their budget.",
+      impact: "Built a full-stack AI interior-design app that turns a bedroom photo into multiple redesigns and matches real, in-budget furniture products with direct purchase links.",
+      approach: "Designed an upload → theme → budget flow, a product-selection engine that picks items by theme and budget tier, and a Replicate-powered generation step that renders the redesigned room using those products as context.",
+      challenge: "Generic AI room renders look pretty but aren't actionable — you can't buy what's in the picture. The hard part was grounding generation in a real product catalog so the output is both visually convincing and shoppable within the user's budget.",
+      results: [
+        { value: "Before / after", label: "Tabbed redesign comparison" },
+        { value: "Budget-matched", label: "Real products with buy links" },
+        { value: "Replicate AI", label: "adirik/interior-design model" }
+      ],
+      highlights: [
+        "Built the full stack: React + Vite front end, FastAPI (Python 3.11) back end, and Supabase (PostgreSQL + Storage) for products, jobs and generated results.",
+        "Designed a product-selection engine that filters a furniture catalog by theme and budget tier, then feeds those items as context into the Replicate adirik/interior-design model so the render reflects buyable products.",
+        "Delivered a before/after experience with tabbed design variants and product recommendation cards carrying direct purchase links.",
+        "Deployed as a live product — front end on Vercel, FastAPI back end on Render with auto-generated API docs — wired to auto-deploy from GitHub."
+      ],
+      techStack: ["React", "Vite", "FastAPI", "Python", "Supabase", "Replicate"],
+      hardSkills: ["Full-Stack Development", "Generative AI", "API Design", "Data Modeling"],
+      softSkills: ["Product Strategy", "UX Design", "AI Product Thinking"],
+      liveUrl: "https://bedroom-ai.vercel.app",
+      featured: true
+    },
     {
       id: "loan-app",
       title: "ML Credit Scoring & Loan App",
@@ -111,6 +232,31 @@ export const portfolioData = {
       softSkills: ["Brand Positioning", "UX Strategy", "Content Architecture"]
     },
     {
+      id: "mani-doro-jewellery",
+      title: "Mani D'Oro — Gold Jewellery Storefront",
+      outcome: "Luxury E-commerce Showcase",
+      problem: "Handcrafted jewellery sells on emotion and detail, but most small-brand storefronts feel generic and fail to convey craftsmanship or heritage.",
+      impact: "Designed and built a premium gold-jewellery e-commerce showcase with a luxury 'Obsidian & Gold' editorial aesthetic and a full cart & reservation experience.",
+      approach: "Built a full-stack TypeScript storefront — React front end, Express server, Drizzle ORM — with a mobile-first gallery, lightbox, and global cart state.",
+      challenge: "Luxury retail lives or dies on feel. The challenge was engineering interactions — a spring-animated cart drawer, tap-to-zoom lightbox, touch-swipe galleries — that read as 'high-end boutique' rather than 'template store' on any device.",
+      results: [
+        { value: "Obsidian & Gold", label: "Curated luxury palette" },
+        { value: "Cart + reserve", label: "Context state, live subtotal" },
+        { value: "Mobile-first", label: "Swipe gallery + zoom lightbox" }
+      ],
+      highlights: [
+        "Built a global cart & reservation system with React Context — a spring-animated slide-in drawer with quantity/size controls, live subtotal, and an animated nav badge that updates instantly.",
+        "Crafted a premium dynamic gallery: touch-responsive swiping, a full-screen tap-to-zoom lightbox, overlaid prev/next navigation, synced dot indicators and a thumbnail grid.",
+        "Designed a fully responsive, mobile-first 'Obsidian & Gold' UI on a curated palette (Obsidian #1d1c12, Cream #fef9e9, Artisanal Gold #795900) for a rich, immersive feel.",
+        "Shipped on a modern full-stack TypeScript architecture (React + Vite front end, Express + Drizzle ORM back end), deployed live to Netlify."
+      ],
+      techStack: ["React", "TypeScript", "Vite", "Express", "Drizzle ORM", "Tailwind CSS", "Framer Motion"],
+      hardSkills: ["Web Architecture", "E-commerce UX", "Responsive UI", "State Management"],
+      softSkills: ["Brand Positioning", "Luxury UX Strategy", "Visual Design"],
+      liveUrl: "https://mdoro.netlify.app",
+      featured: true
+    },
+    {
       id: "expense-insights",
       title: "Personal Expense Insights Dashboard",
       outcome: "Full Spending Visibility",
@@ -205,6 +351,50 @@ export const portfolioData = {
       techStack: ["Python", "Streamlit", "Pandas", "Plotly", "yfinance", "NumPy"],
       hardSkills: ["Risk Metrics Calculation", "Data Aggregation", "Financial APIs"],
       softSkills: ["Strategic Insight Generation", "Investing Domain Knowledge"]
+    },
+    {
+      id: "bg-remover",
+      title: "AI Image Background Remover API",
+      outcome: "83% Benchmark Efficiency",
+      problem: "Real-time apps needed reliable background removal without shipping every image to a heavy third-party service.",
+      impact: "Developed a custom U-Net background-removal model (83% efficiency on MS-COCO) served through a Flask REST API.",
+      approach: "Trained a U-Net segmentation model, refined masks with a pre-trained Detectron-2 stage, and exposed it via a Flask API.",
+      challenge: "Single-model segmentation leaves ragged edges on hair and transparent regions. Chaining a U-Net mask with Detectron-2 instance refinement improved extraction quality without tanking inference speed.",
+      results: [
+        { value: "83%", label: "Efficiency on MS-COCO" },
+        { value: "U-Net", label: "Custom segmentation model" },
+        { value: "REST API", label: "Real-time integration" }
+      ],
+      highlights: [
+        "Trained a custom U-Net on the MS-COCO dataset, achieving an 83% efficiency score on the segmentation benchmark.",
+        "Enhanced object-extraction accuracy and processing speed using pre-trained Detectron-2 models for instance refinement.",
+        "Built a Flask REST API for seamless integration into real-time applications, with versioning, documentation and onboarding for external testers."
+      ],
+      techStack: ["Python", "U-Net", "Detectron-2", "TensorFlow", "Flask", "OpenCV"],
+      hardSkills: ["Computer Vision", "Image Segmentation", "Model Training", "API Design"],
+      softSkills: ["Applied Research", "Documentation", "Tester Onboarding"]
+    },
+    {
+      id: "gait-trajectory",
+      title: "Gait Trajectory Prediction System",
+      outcome: "+25% Motion Accuracy",
+      problem: "Biped-robot motion planning needed accurate trajectory prediction that traditional kinematics models couldn't reliably provide.",
+      impact: "Designed deep-learning models for biped-robot motion that improved trajectory accuracy 25% over traditional methods — the B.Tech dissertation.",
+      approach: "Combined inverse kinematics with DNN and LSTM models to learn the temporal dynamics of gait from sequence data.",
+      challenge: "Inverse kinematics gives a valid pose but not a natural, stable trajectory over time. An LSTM had to learn the temporal dynamics of gait so predicted motion stayed smooth and physically plausible across the whole sequence.",
+      results: [
+        { value: "+25%", label: "Motion accuracy gain" },
+        { value: "LSTM", label: "Temporal sequence model" },
+        { value: "B.Tech", label: "Dissertation project" }
+      ],
+      highlights: [
+        "Designed models for analysing biped-robot motion using inverse kinematics and deep learning, improving motion accuracy by 25%.",
+        "Optimized motion planning with an LSTM-based model, outperforming traditional methods in accuracy and reliability.",
+        "Benchmarked DNN vs LSTM approaches for trajectory prediction as the B.Tech dissertation."
+      ],
+      techStack: ["Python", "TensorFlow", "Keras", "LSTM", "NumPy"],
+      hardSkills: ["Deep Learning", "Time-Series Modeling", "Robotics / Kinematics", "Model Benchmarking"],
+      softSkills: ["Academic Research", "Experimental Design"]
     }
   ],
 
@@ -290,7 +480,8 @@ export const portfolioData = {
     "AI & Data Engineering": [
       "Feature Engineering", "Model Evaluation (Precision/Recall/F1)", "MLOps (Deployment & Monitoring)",
       "Vector Databases (FAISS/Pinecone)", "Embeddings & Similarity Search", "LLM Fine-tuning",
-      "Prompt Optimization", "API Integration (OpenAI/HuggingFace)", "Experiment Tracking (MLflow)"
+      "Prompt Optimization", "API Integration (OpenAI/HuggingFace)", "Anthropic / Claude API",
+      "Experiment Tracking (MLflow)", "Keras / scikit-learn"
     ],
     "Data & Business Intelligence": [
       "Advanced SQL (Window Functions)", "Data Visualization (Tableau/Power BI)", "Dashboard Design",
@@ -300,7 +491,8 @@ export const portfolioData = {
     "Cloud & System Architecture": [
       "System Design (HL Architecture)", "Microservices Architecture", "REST API Design",
       "Authentication (JWT/OAuth)", "Kubernetes Foundations", "Infrastructure as Code (Terraform)",
-      "Monitoring & Logging (Prometheus/Grafana)", "Scalability & Load Handling"
+      "Monitoring & Logging (Prometheus/Grafana)", "Scalability & Load Handling",
+      "Stripe API Integration", "Node.js / Express", "MongoDB"
     ]
   },
 
@@ -400,6 +592,16 @@ export const portfolioData = {
       foundation: "Autonomous DB // ADW // Big Data",
       rationale: "Leveraging high-performance autonomous data systems. Focuses on automating data warehousing and analytics workflows to drive high-density business intelligence.",
       competencies: ["Autonomous Database", "Data Lake Integration", "OCI Analytics", "ETL Automation"]
+    },
+    {
+      title: "AWS — The Elements of Data Science",
+      issuer: "Amazon Web Services",
+      year: "2024",
+      vendor: "aws",
+      logo: "/assets/logos/aws.svg",
+      foundation: "SageMaker // ML Workflow // Model Eval",
+      rationale: "Grounding the end-to-end machine-learning workflow on AWS — from problem framing and feature engineering to model evaluation and the deployment trade-offs that decide whether a model survives production.",
+      competencies: ["ML Workflow", "Feature Engineering", "Model Evaluation", "Bias-Variance Trade-offs"]
     }
   ],
   education: [
@@ -407,6 +609,8 @@ export const portfolioData = {
       degree: "B.Tech in Computer Science and Engineering",
       university: "Rajasthan Technical University",
       location: "India",
+      gpa: "8.96 / 10",
+      duration: "2020 – 2024",
       modules: ["Data Structures", "Cloud Computing", "ML/AI", "DBMS", "Java", "Linux", "UNIX", "System Design"],
       dissertation: "Developed a QR Code-based Medicine Inventory System for real-time retrieval of medicine details and purchase locations."
     }
