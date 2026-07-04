@@ -145,6 +145,16 @@ const ProjectWorkbench = ({ activeProjectIndex, setActiveProjectIndex }) => {
                 </div>
                 <h4>{activeProject.title}</h4>
                 <p className="project-detail-summary">{activeProject.problem}</p>
+                {activeProject.liveUrl && (
+                  <a
+                    href={activeProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-3 text-[13px] font-semibold text-[#C7B27A] hover:text-white transition-colors"
+                  >
+                    View live <span aria-hidden="true">↗</span>
+                  </a>
+                )}
               </div>
 
               {/* ── Results metrics row ─────────────────────────── */}
@@ -745,7 +755,20 @@ const CredentialsShowcase = () => {
               <h3 className="hero-heading !text-5xl lg:!text-6xl !leading-[1.1] text-white mb-8 tracking-tight">
                 {edu.degree}
               </h3>
-              
+
+              {(edu.gpa || edu.duration) && (
+                <div className="flex flex-wrap items-center gap-3 mb-8">
+                  {edu.gpa && (
+                    <span className="tech-pill tone-emerald w-fit text-[11px] px-4 py-2 font-bold uppercase tracking-widest border-emerald-500/40 bg-emerald-500/5">
+                      GPA {edu.gpa}
+                    </span>
+                  )}
+                  {edu.duration && (
+                    <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-stone-400">{edu.duration}</span>
+                  )}
+                </div>
+              )}
+
               <div className="flex items-center gap-6">
                 <div className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
                   <p className="text-stone-300 text-sm leading-relaxed max-w-sm">

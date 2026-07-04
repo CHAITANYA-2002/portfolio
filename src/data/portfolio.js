@@ -257,144 +257,28 @@ export const portfolioData = {
       featured: true
     },
     {
-      id: "expense-insights",
-      title: "Personal Expense Insights Dashboard",
-      outcome: "Full Spending Visibility",
-      problem: "Users often struggle to understand where their money goes across categories and recurring expenses.",
-      impact: "Built a fintech dashboard categorizing expenses and highlighting monthly spending patterns.",
-      approach: "Focused on readable charts, budget thresholds, and lightweight transaction tagging.",
-      challenge: "Raw transaction data from bank exports is messy — inconsistent merchant names, mixed currencies, and ambiguous category signals. Accurate categorization required a hybrid rule-based + keyword-ML approach to hit useful precision without manual labeling at scale.",
+      id: "finsight-360",
+      title: "FinSight 360 — Financial Operating System",
+      outcome: "Connected Personal & Business Finance",
+      problem: "Managing multiple fragmented financial tools — separate apps for invoicing, expense tracking, investments, and loan planning — leads to broken workflows, high manual effort, and zero unified analytics.",
+      impact: "Architected and built a self-contained financial operating system (FinSight 360) that integrates expense intelligence, invoice workflows, investment risk metrics, and loan calculators under a single domain event graph.",
+      approach: "Designed a modular FastAPI + React/TS architecture, modeled decimal-accurate operations, built a rule-based + keyword-ML classification engine for bank statement imports, and calculated portfolio risk metrics using live market feeds.",
+      challenge: "Fintech integration fails when domain states are siloed. The core engineering challenge was designing a robust domain event bus that ensures mutations (like invoice payment records, CSV imports, or investment rebalancing) correctly trigger downstream updates — recalculating the 8-pillar financial health score and refreshing the AI recommendation engine with zero race conditions.",
       results: [
-        { value: "10+", label: "Spending categories auto-tagged" },
-        { value: "92%", label: "Categorization accuracy" },
-        { value: "1 score", label: "Financial health at a glance" }
+        { value: "One Connected OS", label: "Unified executive workspace" },
+        { value: "92%", label: "ML classification accuracy" },
+        { value: "Decimal", label: "Safe financial math end-to-end" }
       ],
       highlights: [
-        "Built a two-pass categorization engine: first pass applies regex rules for known merchants (Swiggy → Food, Amazon → Shopping); second pass runs a TF-IDF classifier trained on 2000 labeled transactions for ambiguous entries.",
-        "Interactive Plotly charts update dynamically on category filter — monthly trend line, budget threshold bar, and anomaly flags (transactions >2σ from the monthly mean) rendered in a single view.",
-        "Designed a 'Spending Health Score' (0–100) computed from budget adherence, savings rate, and recurring-expense ratio — gives users a single actionable number instead of 12 charts to interpret.",
-        "Ingestion pipeline accepts CSV exports from 6 major Indian banks with different column schemas; a normalization layer maps them to a canonical transaction model before any processing begins.",
-        "Added a 'recurring detection' module that identifies subscriptions and EMIs using interval analysis on merchant-amount pairs — flagging them separately so users can audit fixed commitments vs discretionary spend."
+        "Built a connected finance workspace containing 5 modules: Expense Intelligence (CSV parsing + ML categorization), Invoices & Receivables (GST-aware mutable lifecycle), Loan Center (refinancing + FOIR calculators), Savings, and Investment Risk.",
+        "Engineered a dual-pass categorization engine using HDFC/ICICI/SBI normalization rules and a TF-IDF classifier (trained on 2,000 labeled entries) achieving 92% categorization accuracy.",
+        "Computed key portfolio risk metrics (annualized Sharpe ratio, portfolio beta relative to market, and historical 95% Value-at-Risk) from live market data cached via Redis.",
+        "Implemented a deterministic 0-100 financial health engine scoring across 8 weighted pillars, triggered reactively by domain events like invoice closures or budget alerts.",
+        "Built with strict tenant isolation, JWT auth, SQLAlchemy 2.0 (with NUMERIC 14,2 representation), and custom rate-limiting middleware, tested with 60+ unit/integration tests."
       ],
-      techStack: ["Python", "Pandas", "Plotly", "SQL", "Streamlit", "Excel"],
-      hardSkills: ["Financial Analytics", "Data Categorization", "Interactive Visuals"],
-      softSkills: ["Self-service Dashboard Design", "Fintech Literacy"]
-    },
-    {
-      id: "invoice-tracker",
-      title: "Invoice & Payment Tracker",
-      outcome: "Cleaner Cashflow Tracking",
-      problem: "Small teams needed a basic way to track invoices, due dates, and payment status without full ERP tools.",
-      impact: "Created a simple invoice tracker for receivables, reminders, and cashflow visibility.",
-      approach: "Designed status states, aging buckets, due-date views, and export-friendly reports.",
-      challenge: "Small teams don't want a complex ERP — they want the 20% of features that solve 80% of the pain. The product challenge was defining exactly which invoice states, filters, and export formats mattered, then building nothing else.",
-      results: [
-        { value: "5 states", label: "Invoice lifecycle stages" },
-        { value: "1 click", label: "PDF export from live data" },
-        { value: "JWT", label: "Multi-user auth, no data leak" }
-      ],
-      highlights: [
-        "Modeled the invoice lifecycle as a strict state machine: Draft → Sent → Viewed → Partially Paid → Paid / Overdue — each transition is logged with a timestamp and user ID for a complete audit trail.",
-        "PDF generation uses a print-optimized React component rendered server-side via Puppeteer — the output matches the on-screen invoice exactly, including logo, line items, tax breakdown, and payment terms.",
-        "REST API built with Express + MongoDB; JWT middleware enforces tenant isolation so multi-user teams can share one instance without exposing each other's invoice data across authenticated routes.",
-        "Aging bucket logic automatically flags invoices as 'At Risk' (30+ days) or 'Critical' (60+ days) and surfaces them at the top of the dashboard — no manual sorting required by the user.",
-        "Designed an email reminder template system where overdue invoices trigger a pre-written follow-up draft (via mailto: link) pre-populated with client name, amount, and days overdue for one-click sending."
-      ],
-      techStack: ["React", "Node.js", "MongoDB", "Tailwind CSS", "PDF Export", "REST API"],
-      hardSkills: ["CRUD Operations", "State Management", "Document Export", "API Design"],
-      softSkills: ["Operations Design", "User Flow Mapping", "Workflow Automation"]
-    },
-    {
-      id: "emi-calculator",
-      title: "EMI & Affordability Planner",
-      outcome: "Smarter Loan Planning",
-      problem: "Borrowers needed a quick way to compare tenure, interest, EMI, and affordability before applying.",
-      impact: "Built a clear EMI planning tool that helps users compare scenarios before choosing a loan option.",
-      approach: "Modeled EMI calculations, affordability bands, and simple scenario comparison logic.",
-      challenge: "Most EMI calculators give a number with no context. The UX challenge was showing not just what the EMI is, but whether the user can actually afford it — and making that judgment feel helpful rather than judgmental.",
-      results: [
-        { value: "2 modes", label: "Reducing-balance & flat-rate" },
-        { value: "Real-time", label: "Amortization chart updates" },
-        { value: "40% rule", label: "Affordability warning threshold" }
-      ],
-      highlights: [
-        "Implemented both reducing-balance and flat-rate EMI formulas side-by-side with a mode toggle — the difference in total interest paid between the two is surfaced clearly as a cost-of-credit comparison.",
-        "Amortization schedule chart (Chart.js) re-renders on every slider change — principal vs. interest split across tenure is visualized as a stacked area chart so users see exactly how much goes to interest over time.",
-        "Affordability band logic warns users when projected EMI exceeds 40% of stated take-home income (a standard FOIR threshold used by Indian lenders) — framed as guidance, not a blocker.",
-        "Scenario comparison panel lets users pin up to 3 loan configurations (amount / tenure / rate combinations) and view them side-by-side in a table — total cost, monthly EMI, and break-even month all visible at once.",
-        "All state (loan amount, tenure, rate, income) is serialized into URL query params on every change, making every scenario shareable via a single link — useful for users comparing options across devices."
-      ],
-      techStack: ["React", "JavaScript", "Tailwind CSS", "Chart.js", "Vite"],
-      hardSkills: ["Financial Modeling", "Calculator Logic", "Dynamic Charting"],
-      softSkills: ["UX Clarity", "Simple Logic Communication"]
-    },
-    {
-      id: "portfolio-risk-lite",
-      title: "Portfolio Risk Lite",
-      outcome: "Instant Risk Snapshot",
-      problem: "Beginner investors needed a simple overview of allocation risk without complex trading software.",
-      impact: "Created a lightweight dashboard summarizing allocation, exposure, and basic risk signals.",
-      approach: "Used simple asset grouping, visual summaries, and plain-language risk indicators.",
-      challenge: "Quant risk metrics (Sharpe, VaR, beta) are meaningless to most retail investors without context. The challenge was computing them accurately from live data while translating the output into plain language that actually informs a decision.",
-      results: [
-        { value: "Live", label: "yfinance price data on refresh" },
-        { value: "3 metrics", label: "Sharpe, Beta, VaR computed" },
-        { value: "3 labels", label: "Low / Moderate / High risk" }
-      ],
-      highlights: [
-        "Pulls live OHLCV data via yfinance on each session load; computes annualized Sharpe ratio, portfolio beta relative to NIFTY 50, and 95% Value-at-Risk using historical simulation on a 1-year lookback window.",
-        "Correlation heatmap (Plotly) shows pairwise asset correlation across the portfolio — high-correlation clusters are highlighted in red, making concentration risk immediately visible to a non-expert user.",
-        "Risk label engine maps computed metrics to plain-language tiers (Low / Moderate / High) using a weighted scoring function — Sharpe > 1, Beta < 0.8, and VaR < 5% together produce a 'Low Risk' label.",
-        "Portfolio rebalancing suggestor compares current weights against a user-defined target allocation and outputs the exact buy/sell quantities needed to bring each position back within tolerance.",
-        "Caching layer stores fetched price data for 15 minutes using session state — prevents redundant yfinance API calls on rapid re-renders and keeps the dashboard responsive during exploratory use."
-      ],
-      techStack: ["Python", "Streamlit", "Pandas", "Plotly", "yfinance", "NumPy"],
-      hardSkills: ["Risk Metrics Calculation", "Data Aggregation", "Financial APIs"],
-      softSkills: ["Strategic Insight Generation", "Investing Domain Knowledge"]
-    },
-    {
-      id: "bg-remover",
-      title: "AI Image Background Remover API",
-      outcome: "83% Benchmark Efficiency",
-      problem: "Real-time apps needed reliable background removal without shipping every image to a heavy third-party service.",
-      impact: "Developed a custom U-Net background-removal model (83% efficiency on MS-COCO) served through a Flask REST API.",
-      approach: "Trained a U-Net segmentation model, refined masks with a pre-trained Detectron-2 stage, and exposed it via a Flask API.",
-      challenge: "Single-model segmentation leaves ragged edges on hair and transparent regions. Chaining a U-Net mask with Detectron-2 instance refinement improved extraction quality without tanking inference speed.",
-      results: [
-        { value: "83%", label: "Efficiency on MS-COCO" },
-        { value: "U-Net", label: "Custom segmentation model" },
-        { value: "REST API", label: "Real-time integration" }
-      ],
-      highlights: [
-        "Trained a custom U-Net on the MS-COCO dataset, achieving an 83% efficiency score on the segmentation benchmark.",
-        "Enhanced object-extraction accuracy and processing speed using pre-trained Detectron-2 models for instance refinement.",
-        "Built a Flask REST API for seamless integration into real-time applications, with versioning, documentation and onboarding for external testers."
-      ],
-      techStack: ["Python", "U-Net", "Detectron-2", "TensorFlow", "Flask", "OpenCV"],
-      hardSkills: ["Computer Vision", "Image Segmentation", "Model Training", "API Design"],
-      softSkills: ["Applied Research", "Documentation", "Tester Onboarding"]
-    },
-    {
-      id: "gait-trajectory",
-      title: "Gait Trajectory Prediction System",
-      outcome: "+25% Motion Accuracy",
-      problem: "Biped-robot motion planning needed accurate trajectory prediction that traditional kinematics models couldn't reliably provide.",
-      impact: "Designed deep-learning models for biped-robot motion that improved trajectory accuracy 25% over traditional methods — the B.Tech dissertation.",
-      approach: "Combined inverse kinematics with DNN and LSTM models to learn the temporal dynamics of gait from sequence data.",
-      challenge: "Inverse kinematics gives a valid pose but not a natural, stable trajectory over time. An LSTM had to learn the temporal dynamics of gait so predicted motion stayed smooth and physically plausible across the whole sequence.",
-      results: [
-        { value: "+25%", label: "Motion accuracy gain" },
-        { value: "LSTM", label: "Temporal sequence model" },
-        { value: "B.Tech", label: "Dissertation project" }
-      ],
-      highlights: [
-        "Designed models for analysing biped-robot motion using inverse kinematics and deep learning, improving motion accuracy by 25%.",
-        "Optimized motion planning with an LSTM-based model, outperforming traditional methods in accuracy and reliability.",
-        "Benchmarked DNN vs LSTM approaches for trajectory prediction as the B.Tech dissertation."
-      ],
-      techStack: ["Python", "TensorFlow", "Keras", "LSTM", "NumPy"],
-      hardSkills: ["Deep Learning", "Time-Series Modeling", "Robotics / Kinematics", "Model Benchmarking"],
-      softSkills: ["Academic Research", "Experimental Design"]
+      techStack: ["React", "TypeScript", "FastAPI", "SQLAlchemy", "PostgreSQL", "Redis", "Tailwind CSS", "Scikit-Learn"],
+      hardSkills: ["Financial Architecture", "Event-Driven Systems", "Data Modeling", "Risk Math"],
+      softSkills: ["Product Strategy", "Fintech Literacy", "System Security"]
     }
   ],
 
