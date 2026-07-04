@@ -936,7 +936,7 @@
 
     .project-workbench-grid {
       grid-template-columns: 292px minmax(0, 1fr);
-      height: 780px;
+      height: 950px;
     }
 
     .project-detail-shell {
